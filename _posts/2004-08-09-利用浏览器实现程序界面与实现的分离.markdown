@@ -35,12 +35,12 @@ Shdocvw.dll的功能则是调用mshtml.dll来解析网页，以及在它的窗�
 ### 1. GetExternal接口方法
   
 WebBrowser Control提供的接口使得外壳应用程序可以用自己的对象、方法和属性等来扩展IE的对象模型（DOM），以达到个性化定制的目的。在网页中访问外壳应用程序的扩展则通过文档的"external"对象来实现，如外壳程序提供了名为AddFavorite的方法，网页中就通过window.external.AddFavorite()来调用。实现这一功能的核心是IDocHostUIHandler接口的GetExternal方法：
-```delphi
+```pascal
 HRESULT GetExternal(IDispatch **ppDispatch);
 ```
 在自定义的WebBrowser Control中实现IDocHostUIHandler接口，当网页元素通过"external"对象访问外壳扩展的属性和方法时，GetExternal方法就会被调用，在此方法的中将实现外壳程序属性和方法的自动化接口传递给ppDispatch即可。自定义的WebBrowser Control示例代码如下，在其中将GetExternal包装为OnGetExternal事件供外部程序调用。IDocHostUIHandler接口有15个方法，此处我们只关心GetExternal方法，故略去其余14个（省略号处为略去的代码）。
 
-```delphi
+```pascal
 unit ZoCWebBrowser;
 interface
 uses  
@@ -84,7 +84,7 @@ end.
 
 在Delphi的"New Items"对话框中，切换到"ActiveX"页，选择"Automation Object"，新建一个自动化对象，并在"CoClass Name"一栏中填入接口名"MyExternal"，"Instancing"选择为"Internal"，表示该对象只能在程序内部被创建，外部程序不能直接创建。点击"OK"按钮后在Type Library编辑对话框中为IMyExternal接口添加两个方法ShowAboutBox和SwitchUI，此时代码大致如下所示：
 
-```delphi
+```pascal
 unit MyExternalImpl;
 {$WARN SYMBOL_PLATFORM OFF}
 interface
@@ -117,7 +117,7 @@ end.
 
 在程序主窗口中放置一个自定义的WebBrowser Control，命名为ZoCWebBrowser，编写它的OnGetExternal事件（由网页中的window.external调用触发），代码如下：
 
-```delphi
+```pascal
 function TMainForm.ZoCWebBrowserGetExternal(  out ppDispatch: IDispatch): HRESULT;
 var  
   MyExternal: TMyExternal;
