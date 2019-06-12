@@ -1,0 +1,155 @@
+---
+layout:     post
+title:      "利用浏览器实现程序界面与实现的分离"
+subtitle:   " 非常怀念写Delphi的岁月 "
+date:       2004-08-09 
+author:     "eagleboost"
+header-img: "img/post-bg-digital-native.jpg"
+catalog: true
+tags:
+    - WebBrowser
+    - IDocHostUIHandler
+    - GetExternal
+    - Delphi
+---
+
+###引言
+
+在用Delphi、Visual Basic等可视化快速开发工具编写Windows应用程序时，常会遇到这样几个问题：
+1. 希望程序界面美观。在Delphi中，开发人员通常使用各种控件来实现界面的风格化，但缺点是造成应用程序体积较大，且在升级时常会被控件版本与Delphi版本不兼容带来的问题所困扰。
+2. 希望应用程序在功能不变的情况下具有不同的界面风格。这常常通过换"皮肤"的技术来实现，但一般实现"换肤"功能的控件体积都较大，且界面反应速度比较慢，而且 "皮肤"的制作比较麻烦。
+3. 程序界面的维护困难。为了使界面与代码实现相分离而获得"换肤"等灵活性，通常要用到一些设计模式的技术，这对于不熟悉设计模式的开发人员来说比较困难。
+
+微软公司预计将于2006年发布下一代操作系统（开发代号为Longhorn）中，应用程序的结构及部署将有重大变革，其中一项就是应用程序的界面完全以XML的一个扩展集XAML语言来描述，以便达到界面的高度可定制性。这无疑能够方便地解决上述几个问题。问题是在目前来说有没有类似的方法呢？答案就是使用浏览器控件。微软公司的网页浏览器Internet Explorer的核心被设计为可以嵌入到应用程序中重用的ActiveX组件，它有极强的可编程能力和与容器交互的能力，使得开发人员能够快速地开发出功能强劲的应用程序。从下面的Internet Explorer的架构图可以看到，我们平常运行的iexplorer.exe其实只是一个外壳程序，真正的浏览网页、记录历史等工作是由嵌入其窗口的封装在shdocvw.dll中的WebBrowser Control来完成的。
+
+Shdocvw.dll的功能则是调用mshtml.dll来解析网页，以及在它的窗口中嵌入其它活动文档组件（如Microsoft Office、Adobe Acrobat等应用程序的文档都可以嵌入到浏览器窗口中查看）。而mshtml.dll一方面处理HTML解析以及作为脚本引擎、java虚拟机、ActiveX控件、插件的宿主，另一方面，它实现了活动文档服务器接口，允许应用程序以标准的COM接口来把它嵌入到程序中并通过它暴露的接口来访问其中的网页及网页元素。通过shdocvw.dll提供的丰富接口，网页中的元素可以访问外壳应用程序提供的属性和方法（如window.external.AddFavorite(location.href, document.title)则是调用IE的AddFavorite方法把当前页添加到收藏夹），而通过mshtml.dll提供的接口，外壳应用程序则反过来可以访问网页中元素的属性、方法、行为、事件等等。解决文章开头提出的几个问题的方法就是基于shdocvw.dll和mshtml.dll实现的。一些著名软件如：Microsoft Money、Microsoft Visual Studio .NET、Macromedia Dreamweaver MX 2004等都运用了这种技术。
+
+###原理
+1. 程序的界面完全由制作网页来完成。网页在文字、图像、声音等方面具有强大的表现能力，运用所见即所得的网页制作工具可以轻松制作出图文并茂的网页。以网页作为程序的界面，其效果胜过任何界面控件。
+2. "换肤"功能容易实现。只需制作不同风格的网页，即可轻松实现样式各异的程序界面。
+3. 程序的功能在应用程序内部编写代码来实现，并通过一个自动化接口提供给网页中的元素调用。这就实现了程序界面和代码的分离，网页布局及风格的改变不会影响到程序的实现。
+
+###从网页调用外壳程序的属性和方法
+
+##1. GetExternal接口方法
+  
+WebBrowser Control提供的接口使得外壳应用程序可以用自己的对象、方法和属性等来扩展IE的对象模型（DOM），以达到个性化定制的目的。在网页中访问外壳应用程序的扩展则通过文档的"external"对象来实现，如外壳程序提供了名为AddFavorite的方法，网页中就通过window.external.AddFavorite()来调用。实现这一功能的核心是IDocHostUIHandler接口的GetExternal方法：
+```delphi
+HRESULT GetExternal(IDispatch **ppDispatch);
+```
+在自定义的WebBrowser Control中实现IDocHostUIHandler接口，当网页元素通过"external"对象访问外壳扩展的属性和方法时，GetExternal方法就会被调用，在此方法的中将实现外壳程序属性和方法的自动化接口传递给ppDispatch即可。自定义的WebBrowser Control示例代码如下，在其中将GetExternal包装为OnGetExternal事件供外部程序调用。IDocHostUIHandler接口有15个方法，此处我们只关心GetExternal方法，故略去其余14个（省略号处为略去的代码）。
+
+```delphi
+unit ZoCWebBrowser;
+interface
+uses  
+  Variants,IEConst, Windows, SysUtils, Classes, SHDocVw, ActiveX, shlObj, MSHTML, comobj;
+type  
+  ……
+  //定义OnGetExternal事件类型  
+  TGetExternalEvent = function(out ppDispatch: IDispatch): HRESULT of object
+  
+  TZoCWebBrowser = class(TWebBrowser, IDocHostUIHandler)
+  private    
+  ……    
+    FOnGetExternal: TGetExternalEvent;  
+  protected    
+  ……    
+    function GetExternal(out ppDispatch: IDispatch): HRESULT; stdcall;      
+  published    
+  ……    
+    property OnGetExternal: TGetExternalEvent read FOnGetExternal write FOnGetExternal;  
+  end;  
+  ……
+  implementation
+  ……
+  function TZoCWebBrowser.GetExternal(out ppDispatch: IDispatch): HRESULT;
+  begin  
+    if Assigned(FOnGetExternal) then    
+      Result := FOnGetExternal(ppDispatch)  
+    else
+      Result := S_FALSE;end;
+initialization  
+  OleInitialize(nil);
+finalization
+  try
+    OleUninitialize;  
+  except  
+  end;
+end.
+```
+
+##2. 实现外壳程序扩展自动化接口
+
+在Delphi的"New Items"对话框中，切换到"ActiveX"页，选择"Automation Object"，新建一个自动化对象，并在"CoClass Name"一栏中填入接口名"MyExternal"，"Instancing"选择为"Internal"，表示该对象只能在程序内部被创建，外部程序不能直接创建。点击"OK"按钮后在Type Library编辑对话框中为IMyExternal接口添加两个方法ShowAboutBox和SwitchUI，此时代码大致如下所示：
+
+```delphi
+unit MyExternalImpl;
+{$WARN SYMBOL_PLATFORM OFF}
+interface
+uses  
+  ComObj, ActiveX, Project1_TLB, StdVcl;
+type  
+  TMyExternal = class(TAutoObject, IMyExternal)  
+  protected    
+    procedure ShowAboutBox; safecall;    
+    procedure SwitchUI; safecall;  
+  end;
+
+implementation
+uses ComServ;
+procedure TMyExternal.ShowAboutBox;
+begin  
+  MessageBox(MainForm.Handle, 'GetExternal Demo', 'ZoCWebBrowser', MB_OK or MB_ICONASTERISK); 
+end;
+
+procedure TMyExternal.SwitchUI;
+begin  
+  ShowSwitchUIForm;       //显示切换程序界面对话框
+end;
+initialization  
+  TAutoObjectFactory.Create(ComServer, TMyExternal, Class_MyExternal, ciInternal, tmApartment);
+end.
+```
+
+##3. 从网页中调用外壳程序接口
+
+在程序主窗口中放置一个自定义的WebBrowser Control，命名为ZoCWebBrowser，编写它的OnGetExternal事件（由网页中的window.external调用触发），代码如下：
+
+```delphi
+function TMainForm.ZoCWebBrowserGetExternal(  out ppDispatch: IDispatch): HRESULT;
+var  
+  MyExternal: TMyExternal;
+begin  
+  MyExternal:= TMyExternal.Create;         //创建实现自动化接口的对象  
+  ppDispatch :=MyExternal;     //将对象接口传递给WebBrowser Control
+  //这样当"external"对象被调用时，真正被调用的是我们实现的TMyExternal对象  
+  Result :=S_OK;
+end;
+```
+
+假设我们制作了两个风格迥异的的网页Style1.html和Style2.html作为程序界面，这两个网页中都有两个按钮（也可以是其它网页元素），其HTML代码示例如下：
+
+```html
+<button>关于</button>
+<button>切换界面</button>
+```
+
+在程序开始运行时让WebBrowser Control布满整个Form，且显示Style1.html页面，则当点击"关于"按钮时程序将显示一个关于信息对话框，而点击"切换界面"按钮时将显示切换界面的对话框，在其中选择Style2.html并让WebBrowser Control显示它即可获得风格完全不同的界面，但在功能上与Style1.html完全一样。
+
+###总结
+
+从上面的例子可以看到，我们以及其简单的方式实现了程序界面与实现的分离，这有利于程序的维护和扩展。传统方式下，界面设计和编码通常都由程序员来完成，一来造成程序员负担较重，二来难以保证界面质量。实用上述方法，程序界面可以由专业美工人员来设计，他可以在完全不知道程序如何实现的情况下设计出完整的界面，而程序员只需专注于代码的编写，并将必要的方法和属性通过一个自动化接口暴露出来。合并的时候，在网页中合适的位置放入所需的按钮或其它网页元素，并赋予简单的脚本调用即可。
+
+（以上代码均在WindowsXP+Delphi 7环境下调试通过）
+
+###参考文献
+
+《MSDN Library - July 2003》
+
+###引用地址
+ 
+作者：cathyeagle 
+来源：CSDN 
+原文：https://blog.csdn.net/CathyEagle/article/details/69607 
+版权声明：本文为博主原创文章，转载请附上博文链接！
