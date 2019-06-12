@@ -17,8 +17,8 @@ weibo_username:     eagleboost
 zhihu_username:     eagleboost
 github_username:    eagleboost
 twitter_username:   eagleboost
-#facebook_username:  eagleboost
-#linkedin_username:  firstname-lastname-idxxxx
+facebook_username:  eagleboost
+linkedin_username:  jason-zhang-30578b4
 
 
 
@@ -71,15 +71,15 @@ netease_comment: false
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+ga_track_id: 'UA-141930165-1'            # Format: UA-xxxxxx-xx
+ga_domain: eagleboost.com
 
 
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "For the next quantum leap<br>离开世界之前，一切都是过程"
-sidebar-avatar: /img/avatar-hux-ny.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "顺势而不滞于物，冥情而不撄其天<br>不惑之年，保持初心"
+sidebar-avatar: /img/avatar-eagleboost.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -106,8 +106,8 @@ friends: [
     #     title: "Su",
     #     href: "http://su.gallery/"
     # },{
-        title: "乱序",
-        href: "http://mida.re/"
+        title: "blog 2",
+        href: "http://23.239.118.194/~eaglebo1/"
     },{
         title: "前端外刊评论",
         href: "http://qianduan.guru/"
