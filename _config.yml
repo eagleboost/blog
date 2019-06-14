@@ -5,7 +5,7 @@ header-img: img/home-bg.jpg
 email: eagleboost@msn.com
 description: "梦想做大侠"
 keyword: "eagleboost, cathyeagle, zocsoft, 梦想做大侠, eagleboost的博客, eagleboost Blog, 博客"
-url: "http://blog.eagleboost.com"              # your host, for absolute URL
+url: "http://www.eagleboost.com"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
