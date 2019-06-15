@@ -78,7 +78,7 @@ ga_domain: eagleboost.com
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "顺势而不滞于物，冥情而不撄其天<br>保持初心"
+sidebar-about-description: "顺势而不滞于物，冥情而不撄其天"
 sidebar-avatar: /img/avatar-eagleboost.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
