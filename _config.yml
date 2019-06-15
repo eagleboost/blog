@@ -85,7 +85,7 @@ sidebar-avatar: /img/avatar-eagleboost.jpg      # use absolute URL, seeing it's 
 
 # Featured Tags
 featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 0              # A tag will be featured if the size of it is more than this condition value
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
 
 
 
@@ -103,11 +103,8 @@ page-mathjax: false
 # Friends
 friends: [
     {
-    #     title: "Su",
-    #     href: "http://su.gallery/"
-    # },{
-        title: "blog 2",
-        href: "http://23.239.118.194/~eaglebo1/"
+        title: "CathyEagle",
+        href: "https://blog.csdn.net/CathyEagle"
     },{
         title: "前端外刊评论",
         href: "http://qianduan.guru/"
