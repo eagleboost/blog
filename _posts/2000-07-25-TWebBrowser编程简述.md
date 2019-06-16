@@ -132,7 +132,7 @@ procedure ExecWB(cmdID: rOLECMDID; cmdexecopt: OLECMDEXECOPT; var pvaIn: OleVari
     end; 
 ```
 
-+ **查找**：参考第九条“查找”功能。
++ **查找**：参考[第九条“查找”功能](#FindText)。
 
 
 ### 4. 字体大小
@@ -350,7 +350,7 @@ Memo.Lines.Add(IHtmlDocument2(webbrowser.Document).Body.OuterHtml);
 Memo.Lines.Add(IHtmlDocument2(webbrowser.Document).Body.OuterText); 
 ```
 
-### 9. “查找”功能
+### <a name="FindText"></a>9. “查找”功能
 
 查找对话框可以在文档获得焦点的时候通过按键Ctrl-F来调出，程序中则调用`IOleCommandTarget`对象的成员函数Exec执行OLECMDID_FIND操作来调用，下面给出的方法是如何在程序中用代码来做出文字选择，即你可以自己设计查找对话框。
 
