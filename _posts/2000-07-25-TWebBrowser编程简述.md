@@ -4,7 +4,7 @@ title:      "TWebBrowser编程简述"
 subtitle:   "——谨以怀念写Delphi的青春岁月"
 date:       2001-02-07 
 author:     "eagleboost"
-header-img: "img/post-bg-digital-native.jpg"
+header-img: "img/post-bg-desktop.jpg"
 catalog: true
 tags:
     - TWebBrowser
