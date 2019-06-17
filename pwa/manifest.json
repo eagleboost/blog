@@ -1,7 +1,7 @@
 {
-  "name": "Hux Blog",
-  "short_name": "Hux Blog",
-  "description": "About an engineer & designer who loves web.",
+  "name": "eagleboost Blog",
+  "short_name": "eagleboost Blog",
+  "description": "梦想做大侠",
   "icons": [{
     "src": "icons/128.png",
     "sizes": "128x128",
