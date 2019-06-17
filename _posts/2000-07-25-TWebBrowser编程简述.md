@@ -453,10 +453,3 @@ end;
  
 + 最先发表日期：2000年07月25日
 + 最后修改日期：2001年02月07日
-
-## 引用地址
- 
-+ 作者：[cathyeagle](https://me.csdn.net/CathyEagle)
-+ 来源：[CSDN](https://blog.csdn.net/CathyEagle) 
-+ 原文：[https://blog.csdn.net/CathyEagle/article/details/93984](https://blog.csdn.net/CathyEagle/article/details/93984 ) 
-+ 版权声明：本文为博主原创文章，转载请附上博文链接！
