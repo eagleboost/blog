@@ -12,8 +12,6 @@ tags:
     - Attached Behavior
 ---
 
-# TabControl Content Preservation
-
 ## The problem
 Usually WPF developers use the [TabControl](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.tabcontrol?view=netframework-4.8) in two ways:
 1. Hard code [TabItem](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.tabitem?view=netframework-4.8)s in the XAML with a specific UI controls as the content. Each TabItem can have its own different content:
