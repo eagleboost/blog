@@ -7,6 +7,7 @@ author:     "eagleboost"
 header-img: "img/post-bg-sky-night.jpg"
 tags:
     - Internet Explorer编程简述
+    - Internet Explorer编程
     - OLE嵌入
     - In-Place Activating
     - CathyEagle

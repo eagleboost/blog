@@ -5,8 +5,10 @@ subtitle:   "——谨以怀念研究Internet Explorer编程的青春岁月"
 date:       2004-09-12
 author:     "eagleboost"
 header-img: "img/post-bg-flash-car.jpg"
+catalog: true
 tags:
     - Internet Explorer编程简述
+    - Internet Explorer编程
     - 添加到收藏夹
     - 整理收藏夹
     - DoAddToFavDlg
@@ -75,7 +77,7 @@ void CMyHtmlView::OnFavOrganizefav()
     }  
     return;    
   }
-  
+
   bResult = (*lpfnDoOrganizeFavDlg)(m_hWnd, szPath) ? true : false;
 
   if (bShouldUnload)

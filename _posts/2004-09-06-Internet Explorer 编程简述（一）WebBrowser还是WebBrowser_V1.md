@@ -8,6 +8,7 @@ header-img: "img/post-bg-globe.jpg"
 catalog: true
 tags:
     - Internet Explorer编程简述
+    - Internet Explorer编程
     - WebBrowser
     - WebBrowser_V1
     - NewWindow

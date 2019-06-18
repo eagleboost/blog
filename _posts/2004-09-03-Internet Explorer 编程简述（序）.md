@@ -8,6 +8,7 @@ header-img: "img/post-bg-woodhouse.jpg"
 catalog: true
 tags:
     - Internet Explorer编程简述
+    - Internet Explorer编程
     - GoSurf
     - CathyEagle
     - 存档

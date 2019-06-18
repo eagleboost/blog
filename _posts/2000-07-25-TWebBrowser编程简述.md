@@ -8,7 +8,7 @@ header-img: "img/post-bg-desktop.jpg"
 catalog: true
 tags:
     - TWebBrowser
-    - Internet Explorer
+    - Internet Explorer编程
     - 阿甘的家
     - Delphi
     - CathyEagle
