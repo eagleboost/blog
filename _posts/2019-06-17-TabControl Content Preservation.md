@@ -4,7 +4,7 @@ title:      "TabControl Content Preservation"
 subtitle:   "——WPF rocks!"
 date:       2019-06-17
 author:     "eagleboost"
-header-img: "img/post-bg-food.jpg"
+header-img: "img/post-bg-cozy-menu.jpg"
 catalog: true
 tags:
     - WPF
