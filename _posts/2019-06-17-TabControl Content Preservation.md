@@ -5,7 +5,9 @@ subtitle:   "——WPF rocks!"
 date:       2019-06-17
 author:     "eagleboost"
 header-img: "img/post-bg-cozy-menu.jpg"
+header-mask:  0.3
 catalog: true
+multilingual: true
 tags:
     - WPF
     - TabControl
