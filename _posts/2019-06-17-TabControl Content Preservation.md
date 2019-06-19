@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "TabControl Content Preservation"
-subtitle:   "——WPF rocks!"
+title:      "实现TabControl标签页缓存"
+subtitle:   "TabControl Content Preservation"
 date:       2019-06-17
 author:     "eagleboost"
 header-img: "img/post-bg-cozy-menu.jpg"
