@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "利用WH_CBT Hook将非模态对话框显示为模态对话框"
-subtitle:   "——谨以怀念研究Internet Explorer编程的青春岁月"
+subtitle:   "——谨以怀念用Win32 SDK/MFC编程的青春岁月"
 date:       2004-09-13
 author:     "eagleboost"
 header-img: "img/post-bg-cage.jpg"

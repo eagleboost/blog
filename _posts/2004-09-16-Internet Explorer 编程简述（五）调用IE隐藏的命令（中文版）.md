@@ -204,7 +204,7 @@ end;
 1. 用InvokeIEServerCommand(`ID_IE_CONTEXTMENU_ADDFAV`)调用“添加到收藏夹”对话框时需要注意的是，IE接收到`ID_IE_CONTEXTMENU_ADDFAV`命令时是对网页中`当前被选中的链接`来执行“添加到收藏夹”操作的，如果没有选中的链接，才是将当前网页添加到收藏夹。
 2. 新建IE窗口。这是浏览器编程中的难题之一，即从当前窗口新建一个`Internet Explorer`窗口，完全复制当前页的内容（包括“前进”、“后退”的状态），这可以通过InvokeShellDocObjCommand(`ID_IE_FILE_NEWWINDOW`)来实现。
 3. 显示IE的版本信息。调用InvokeShellDocObjCommand(`ID_IE_HELP_ABOUTIE`)。
-4. InvokeShellDocObjCommand(`ID_IE_FILE_PRINT`)调出的“打印”对话框是非模态的（我们不太清楚Microsoft的设计意图，我认为“打印”对话框应该是模态的），显示模态窗口的方法请参加我的另一篇文章《利用`WH_CBT Hook`将非模态对话框显示为模态对话框》
+4. InvokeShellDocObjCommand(`ID_IE_FILE_PRINT`)调出的“打印”对话框是非模态的（我们不太清楚Microsoft的设计意图，我认为“打印”对话框应该是模态的），显示模态窗口的方法请参加我的另一篇文章[《利用`WH_CBT Hook`将非模态对话框显示为模态对话框》](https://eagleboost.com/2004/09/13/%E5%88%A9%E7%94%A8WH_CBT-Hook%E5%B0%86%E9%9D%9E%E6%A8%A1%E6%80%81%E5%AF%B9%E8%AF%9D%E6%A1%86%E6%98%BE%E7%A4%BA%E4%B8%BA%E6%A8%A1%E6%80%81%E5%AF%B9%E8%AF%9D%E6%A1%86/)
 
 ### 参考资料：
 + MSDN：[WebBrowser Customization](https://msdn.microsoft.com/en-us/ie/aa770041(v=vs.94))
