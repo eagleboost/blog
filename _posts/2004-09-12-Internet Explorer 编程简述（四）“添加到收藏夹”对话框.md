@@ -14,6 +14,7 @@ tags:
     - IShellUIHelper
     - DoAddToFavDlg
     - DoOrganizeFavDlg
+    - Internet Explorer_Server
     - CathyEagle
     - 存档
     - csdn
