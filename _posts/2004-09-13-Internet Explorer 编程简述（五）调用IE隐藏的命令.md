@@ -32,4 +32,4 @@ Delphi版本请到[swissdelphicenter](http://www.swissdelphicenter.ch/en/index.p
  
 ### 参考资料
 
-+ MSDN：WebBrowser Customization
++ MSDN：[WebBrowser Customization](https://msdn.microsoft.com/en-us/ie/aa770041(v=vs.94))

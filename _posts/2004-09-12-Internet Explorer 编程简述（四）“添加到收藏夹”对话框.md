@@ -74,7 +74,7 @@ typedef BOOL (CALLBACK* LPFNADDFAV)(HWND, TCHAR*, UINT, TCHAR*, UINT,LPITEMIDLIS
 
 第一个参数正是我们想要的父窗口句柄，第二和第四个参数分别是初始目录（一般来说就是收藏夹目录）和要添加的链接的名字（比如网页的Title），第三和第五个参数分别是第二和第四两个缓冲区的长度，而最后一个参数则是指向与第二个参数目录相关的item identifier list的指针(`PIDL`)。但最奇怪的是这里并没有像“`AddFavorite`”函数一样的链接URL，那链接是怎样添加的呢？答案是“手动创建”。
 
-第二个参数在函数调用返回后会包含用户在“添加到收藏夹”对话框中选择或创建的完整链接路径名（如“`X:/XXX/mylink.url`”），我们就根据这个路径和网页的URL来创建链接，代码如下（为简化，此处省去检查"`shdocvw.dll`"是否已在内存中的代码，参见《Internet Explorer 编程简述（三）“整理收藏夹”对话框）：
+第二个参数在函数调用返回后会包含用户在“添加到收藏夹”对话框中选择或创建的完整链接路径名（如“`X:/XXX/mylink.url`”），我们就根据这个路径和网页的URL来创建链接，代码如下（为简化，此处省去检查"`shdocvw.dll`"是否已在内存中的代码，参见[《Internet Explorer 编程简述（三）“整理收藏夹”对话框》](https://eagleboost.com/2004/09/12/Internet-Explorer-%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0-%E4%B8%89-%E6%95%B4%E7%90%86%E6%94%B6%E8%97%8F%E5%A4%B9-%E5%AF%B9%E8%AF%9D%E6%A1%86/)）：
 
  
 ```c++
