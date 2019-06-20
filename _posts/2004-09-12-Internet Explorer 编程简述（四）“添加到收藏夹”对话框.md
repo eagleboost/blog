@@ -41,14 +41,15 @@ HRESULT IShellUIHelper::AddFavorite(BSTR URL, VARIANT *Title);
 void CMyHtmlView::OnAddToFavorites()
 {  
   IShellUIHelper* pShellUIHelper;  
-  HRESULT hr = CoCreateInstance(CLSID_ShellUIHelper, NULL, CLSCTX_INPROC_SERVER, IID_IShellUIHelper,(LPVOID*)&pShellUIHelper);
+  HRESULT hr = CoCreateInstance(CLSID_ShellUIHelper, NULL, CLSCTX_INPROC_SERVER, IID_IShellUIHelper, (LPVOID*)&pShellUIHelper);
 
   if (SUCCEEDED(hr))
   {    
     _variant_t vtTitle(GetTitle().AllocSysString());    
     CString strURL = m_webBrowser.GetLocationURL();
 
-    pShellUIHelper->AddFavorite(strURL.AllocSysString(), &vtTitle);pShellUIHelper->Release();  
+    pShellUIHelper->AddFavorite(strURL.AllocSysString(), &vtTitle);
+    pShellUIHelper->Release();  
   }
 }
 ```
@@ -96,9 +97,10 @@ void CMyHtmlView::OnFavAddtofav()
         strcpy(szURL, GetLocationURL());
         BOOL bOK = lpfnDoAddToFavDlg(m_hWnd, szPath, sizeof(szPath)/sizeof(szPath[0]), szTitle, sizeof(szTitle)/sizeof(szTitle[0]), pidlFavorites); 
         CoTaskMemFree(pidlFavorites);
+
         if (bOK) 
         {
-          CreateInternetShortcut( szURL, szPath, "");  //创建Internet快捷方式      
+          CreateInternetShortcut(szURL, szPath, "");  //创建Internet快捷方式      
         }
       }    
     }    
@@ -119,7 +121,7 @@ HRESULT CMyHtmlView::CreateInternetShortcut(LPCSTR pszURL, LPCSTR pszURLfilename
 
   IUniformResourceLocator *pHook;
 
-  hres = CoCreateInstance (CLSID_InternetShortcut, NULL, CLSCTX_INPROC_SERVER, IID_IUniformResourceLocator, (void **)&pHook);  
+  hres = CoCreateInstance(CLSID_InternetShortcut, NULL, CLSCTX_INPROC_SERVER, IID_IUniformResourceLocator, (void **)&pHook);  
   
   if (SUCCEEDED (hres))  
   {    
@@ -144,7 +146,7 @@ HRESULT CMyHtmlView::CreateInternetShortcut(LPCSTR pszURL, LPCSTR pszURLfilename
         if (SUCCEEDED(hres))  
         {    
           // Ensure that the string consists of ANSI characters.    
-          MultiByteToWideChar (CP_ACP, 0, pszURLfilename, -1, wsz, MAX_PATH);
+          MultiByteToWideChar(CP_ACP, 0, pszURLfilename, -1, wsz, MAX_PATH);
           // Save the shortcut via the IPersistFile::Save member function.  
           hres = ppf->Save(wsz, TRUE);  
         }
