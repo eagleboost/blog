@@ -126,35 +126,35 @@ HRESULT CMyHtmlView::CreateInternetShortcut(LPCSTR pszURL, LPCSTR pszURLfilename
     IPersistFile *ppf;    
     IShellLink *psl;
     // Query IShellLink for the IPersistFile interface 
-    hres = pHook->QueryInterface (IID_IPersistFile, (void **)&ppf);  
-    hres = pHook->QueryInterface (IID_IShellLink, (void **)&psl);
+    hres = pHook->QueryInterface(IID_IPersistFile, (void **)&ppf);  
+    hres = pHook->QueryInterface(IID_IShellLink, (void **)&psl);
 
-    if (SUCCEEDED (hres))  
+    if (SUCCEEDED(hres))  
     {
       // buffer for Unicode string
       WORD wsz [MAX_PATH];
       // Set the path to the shortcut target.  
-      pHook->SetURL(pszURL,0);
+      pHook->SetURL(pszURL, 0);
       hres = psl->SetIconLocation(szIconFile, nIndex);
 
-      if (SUCCEEDED (hres))  
+      if (SUCCEEDED(hres))  
       {    
         // Set the description of the shortcut.    
         hres = psl->SetDescription(szDescription);
-        if (SUCCEEDED (hres))  
+        if (SUCCEEDED(hres))  
         {    
           // Ensure that the string consists of ANSI characters.    
           MultiByteToWideChar (CP_ACP, 0, pszURLfilename, -1, wsz, MAX_PATH);
           // Save the shortcut via the IPersistFile::Save member function.  
-          hres = ppf->Save (wsz, TRUE);  
+          hres = ppf->Save(wsz, TRUE);  
         }
       }
       // Release the pointer to IPersistFile.  
-      ppf->Release ();  
-      psl->Release ();  
+      ppf->Release();  
+      psl->Release();  
     }
     // Release the pointer to IShellLink.  
-    pHook->Release ();
+    pHook->Release();
   }  
   return hres;
 }
@@ -188,11 +188,11 @@ void CMyHtmlView::OnFavAddtofav()
 void CMIEView::ExecScript(CString strjs)
 {  
   CComQIPtr pHTMLDoc = (IHTMLDocument2*)GetHtmlDocument();  
-  if ( pHTMLDoc != NULL )  
+  if (pHTMLDoc != NULL)  
   {    
     CComQIPtr pHTMLWnd;    
-    pHTMLDoc->get_parentWindow( &pHTMLWnd );    
-    if ( pHTMLWnd != NULL )    
+    pHTMLDoc->get_parentWindow(&pHTMLWnd);    
+    if (pHTMLWnd != NULL)    
     {      
       CComBSTR bstrjs = strjs.AllocSysString();
       CComBSTR bstrlan = SysAllocString(L"javascript");
