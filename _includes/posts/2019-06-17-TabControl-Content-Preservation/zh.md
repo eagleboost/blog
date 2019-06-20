@@ -14,7 +14,7 @@
   </TabControl.Items>
 </TabControl>
 ```
-2. 在[M-V-VM](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/mvvm)的编程模式下则通常把TabControl的[ItemsSource](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.itemscontrol.itemssource?view=netframework-4.8)属性绑定到数据源，再用[ContentTemplate](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.tabcontrol.contenttemplate?view=netframework-4.8)及[ContentTemplateSelector](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.tabcontrol.contenttemplateselector?view=netframework-4.8)根据数据项生成UI上的控件，不同的数据项（可以是类型不同，也可以是属性不同）可以映射到不同的模板，最终生成的控件也可以不同。
+2. 在[M-V-VM](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/mvvm)的编程模式下则通常把TabControl的[ItemsSource](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.itemscontrol.itemssource?view=netframework-4.8)属性绑定到数据源，再用[ContentTemplate](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.tabcontrol.contenttemplate?view=netframework-4.8)及[ContentTemplateSelector](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.tabcontrol.contenttemplateselector?view=netframework-4.8)根据数据项生成UI上的控件，不同的数据项（可以是类型不同，也可以是属性不同）可以映射到不同的模板，最终生成的控件也不同。
 
 ```html
 <TabControl ItemsSource="{Binding DataSource}">
