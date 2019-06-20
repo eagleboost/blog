@@ -10,6 +10,7 @@ catalog: true
 multilingual: true
 tags:
     - WPF
+    - WPF高级编程
     - TabControl
     - Attached Property
     - 附加属性 
