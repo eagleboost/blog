@@ -78,7 +78,7 @@ implementation
 function BrowseCallbackProc(hwnd: HWND;uMsg: UINT;lParam: Cardinal;lpData: Cardinal): integer; stdcall; 
 begin 
   if uMsg=BFFM_INITIALIZED then 
-    result :=SendMessage(Hwnd,BFFM_SETSELECTION,Ord(TRUE),Longint(PChar(Path))) 　
+    result :=SendMessage(Hwnd,BFFM_SETSELECTION,Ord(TRUE),Longint(PChar(Path)))
   else
     result :=1 
 end; 
@@ -122,16 +122,16 @@ begin
         ItemIDList := ShBrowseForFolder(BrowseInfo);  
       finally
         EnableTaskWindows(WindowList);  
-      end; 　
+      end;
 　
       Result := ItemIDList <> nil;  
       if Result then 
       begin  
-        ShGetPathFromIDList(ItemIDList, Buffer); 　
-        ShellMalloc.Free(ItemIDList); 　
-  Directory := Buffer; 　
+        ShGetPathFromIDList(ItemIDList, Buffer);
+        ShellMalloc.Free(ItemIDList);
+  Directory := Buffer;
       end; 
-    finally 　
+    finally
       ShellMalloc.Free(Buffer); 
     end; 
   end; 
