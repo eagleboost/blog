@@ -63,7 +63,7 @@ begin
   tmpSLink := tmpObject as IShellLink; //取得接口
   tmpPFile := tmpObject as IPersistFile;//用来储存*.lnk文件的接口 
   tmpSLink.SetPath(pChar(StartupFilename));//设定.exe所在路径
-  tmpSLink.SetWorkingDirectory(pChar(ExtractFilePath(StartupFilename)));　//设定工作目录
+  tmpSLink.SetWorkingDirectory(pChar(ExtractFilePath(StartupFilename)));  //设定工作目录
   SHGetSpecialFolderLocation(0,dPath,PIDL);//获得dPath的Itemidlist
   SHGetPathFromIDList(PIDL,StartupDirectory); //获得dPath路径
   LinkFilename := StartupDirectory + dName; 
