@@ -2,7 +2,7 @@
 layout:     post
 title:      "TMovePanel"
 subtitle:   "——谨以怀念写Delphi的青春岁月"
-date:       2000-08-18
+date:       2000-08-18 00:00:00
 author:     "eagleboost"
 header-img: "img/post-bg-hongkong-street.jpg"
 catalog: true

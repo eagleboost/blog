@@ -2,7 +2,7 @@
 layout:   post
 title:  "SelectDiretory"
 subtitle:   "——谨以怀念写Delphi的青春岁月"
-date:   2000-08-18
+date:   2000-08-18 00:00:01
 author:   "eagleboost"
 header-img: "img/post-bg-corner-21.jpg"
 tags:
