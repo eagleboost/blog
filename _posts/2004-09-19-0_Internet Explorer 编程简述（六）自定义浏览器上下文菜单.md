@@ -42,7 +42,7 @@ Internet Explorer提供了非常开发的接口，使开发人员不仅可以把
 |Text selection | 0x10 |
 |Anchor         | 0x20 |
 
-4) 还可以建立一个DWORD类型的Flags项并将其值设置为0x01，这将使得前述脚本在一个模态窗口中执行，就好像是通过window.showModalDialog调用的，但不同的是在脚本中仍然可以访问window对象。
+4) 还可以建立一个DWORD类型的Flags项并将其值设置为0x01，这将使得前述脚本在一个模态窗口中执行，就好像是通过`window.showModalDialog`调用的，但不同的是在脚本中仍然可以访问`window`对象。
    
 5) 实例脚本如下：
 
