@@ -2,9 +2,9 @@
 layout:     post
 title:      "Internet Explorer 编程简述（七）完美的“编码”菜单"
 subtitle:   "——谨以怀念研究Internet Explorer编程的青春岁月"
-date:       2004-09-19
+date:       2004-09-19 00:00:01
 author:     "eagleboost"
-header-img: "img/post-bg-frog-woods.jpg"
+header-img: "img/post-bg-lights-on-trees.jpg"
 catalog: true
 tags:
     - Internet Explorer编程简述
