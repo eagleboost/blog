@@ -237,7 +237,7 @@ void CWebBrowserSubclassWnd::OnInitMenuPopup(CMenu* pPopupMenu, UINT nIndex, BOO
 
 看完上面的代码，我们又自然地想到浏览器编程中的另一个问题，那就是“编码”菜单。我们指定，手动建立一个“编码”菜单是比较麻烦的事，而且很难做到与浏览器上下文菜单上的“编码”菜单一样的效果。何不使用上述的方法让浏览器自己建立“编码”菜单和处理相应的命令呢？
 
-具体实现请看下一篇文章[《Internet Explorer 编程简述（七）完美的“编码”菜单》](https://eagleboost.com/2004/09/19/Internet-Explorer-%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0-%E4%B8%83-%E5%AE%8C%E7%BE%8E%E7%9A%84-%E7%BC%96%E7%A0%81-%E8%8F%9C%E5%8D%95/)
+具体实现请看下一篇文章[《Internet Explorer 编程简述（七）完美的“编码”菜单》](https://eagleboost.com/2004/09/19/1-Internet-Explorer-%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0-%E4%B8%83-%E5%AE%8C%E7%BE%8E%E7%9A%84-%E7%BC%96%E7%A0%81-%E8%8F%9C%E5%8D%95/)
 
 ### 参考资料
 

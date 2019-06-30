@@ -136,4 +136,4 @@ GetMenuItemCount(); i++ )
 
 ### 参考资料
 
-+ [《Internet Explorer 编程简述（六）自定义浏览器上下文菜单》](https://eagleboost.com/2004/09/19/Internet-Explorer-%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0-%E5%85%AD-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E8%8F%9C%E5%8D%95/)
++ [《Internet Explorer 编程简述（六）自定义浏览器上下文菜单》](https://eagleboost.com/2004/09/19/0_Internet-Explorer-%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0-%E5%85%AD-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E8%8F%9C%E5%8D%95/)
