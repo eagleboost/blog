@@ -25,9 +25,9 @@ Internet Explorer提供了非常开发的接口，使开发人员不仅可以把
 
 ### 2. 最简单的情况
 
-自定义的IE及WebBrowser的上下文菜单，最简单的方式就是在注册表的HKEY_CURRENT_USER/Software/Microsoft/Internet Explorer/MenuExt下添加自定义的键值，步骤如下：
+自定义的IE及WebBrowser的上下文菜单，最简单的方式就是在注册表的`HKEY_CURRENT_USER/Software/Microsoft/Internet Explorer/MenuExt`下添加自定义的键值，步骤如下：
 
-1) 添加一个新的键，其名称即为将来显示在上下文菜单中的菜单项名称，如：　HKEY_CURRENT_USER/Software/Microsoft/Internet Explorer/MenuExt/&Google Search
+1) 添加一个新的键，其名称即为将来显示在上下文菜单中的菜单项名称，如：`HKEY_CURRENT_USER/Software/Microsoft/Internet Explorer/MenuExt/&Google Search`
    
 2) 将新增的键的默认值设置为一个包含脚本的网页的URL（或文件路径全名），该网页中的脚本将在用户点击上下文菜单中的“Google Search”后被浏览器执行。
 
@@ -55,7 +55,7 @@ Internet Explorer提供了非常开发的接口，使开发人员不仅可以把
 1) `IDocHostUIHandler`接口提供了一个`ShowContextMenu`方法，在需要显示上下文菜单之前，MSHTML引擎就会调用实现了`IDocHostUIHandler`接口的宿主程序的`ShowContextMenu`方法。
 
 ```c++
-HRESULTIDocHostUIHandler::ShowContextMenu(
+HRESULT IDocHostUIHandler::ShowContextMenu(
     DWORD dwID,
     POINT *ppt,
     IUnknown *pcmdtReserved,
@@ -63,7 +63,7 @@ HRESULTIDocHostUIHandler::ShowContextMenu(
 );
 ```
 
-dwID参数的意义与Contexts的组合类似；ppt为菜单的弹出点屏幕坐标；pcmdtReserved接口指向IOleCommandTarget接口，可用于检测网页对象的状态和执行命令等操作。pdispReserved在IE5以上版本中指向的是网页对象的IDispatch接口，用以区分不同对象，比如我们可以这样来获得网页对象的指针：
+dwID参数的意义与Contexts的组合类似；ppt为菜单的弹出点屏幕坐标；pcmdtReserved接口指向`IOleCommandTarget`接口，可用于检测网页对象的状态和执行命令等操作。pdispReserved在IE5以上版本中指向的是网页对象的`IDispatch`接口，用以区分不同对象，比如我们可以这样来获得网页对象的指针：
 
 ```c++
 IHTMLElement *pElem;
@@ -164,7 +164,7 @@ HRESULT CBrowserHost::ShowContextMenu(DWORD dwID, POINT *ppt,IUnknown *pcmdTarge
 }
 ```
 
-从上面的例子我们看出，基本的方法就是根据“`shdoclc.dll`”文件中的菜单资源建立菜单，再通过来自pcmdTarget的`IOlcCommandTarget`接口获得“编码”菜单以及HKEY_CURRENT_USER/Software/Microsoft/Internet Explorer/MenuExt下的定义扩展菜单，然后以TPM_RETURNCMD标志调用`TrackPopupMenu`或`TrackPopupMenuEx`弹出菜单，并将返回的菜单命令ID教给浏览器窗口进行处理。这种方法可以调用许多通过浏览器无法直接调用的命令和对话框（参阅：[《Internet Explorer 编程简述（五）调用IE隐藏的命令》](https://eagleboost.com/2004/09/16/Internet-Explorer-%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0-%E4%BA%94-%E8%B0%83%E7%94%A8IE%E9%9A%90%E8%97%8F%E7%9A%84%E5%91%BD%E4%BB%A4-%E4%B8%AD%E6%96%87%E7%89%88/)）。
+从上面的例子我们看出，基本的方法就是根据“`shdoclc.dll`”文件中的菜单资源建立菜单，再通过来自pcmdTarget的`IOlcCommandTarget`接口获得“编码”菜单以及`HKEY_CURRENT_USER/Software/Microsoft/Internet Explorer/MenuExt`下的定义扩展菜单，然后以`TPM_RETURNCMD`标志调用`TrackPopupMenu`或`TrackPopupMenuEx`弹出菜单，并将返回的菜单命令ID教给浏览器窗口进行处理。这种方法可以调用许多通过浏览器无法直接调用的命令和对话框（参阅：[《Internet Explorer 编程简述（五）调用IE隐藏的命令》](https://eagleboost.com/2004/09/16/Internet-Explorer-%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0-%E4%BA%94-%E8%B0%83%E7%94%A8IE%E9%9A%90%E8%97%8F%E7%9A%84%E5%91%BD%E4%BB%A4-%E4%B8%AD%E6%96%87%E7%89%88/)）。
 
 所以，我们只需要在弹出菜单之前做一些自定义操作即可达到修改默认菜单的目的，如上面代码中就用删除了“查看源文件”菜单项。
 
@@ -188,7 +188,7 @@ LRESULT CALLBACK CustomMenuWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
   {    
     if (wParam == (WPARAM) g_hPubMenu)    
     {      
-      ::EnableMenuItem( 自定义的菜单命令ID, MF_ENABLED | MF_BYCOMMAND );      ::CheckMenuItem( 自定义的菜单命令ID, MF_BYCOMMAND);      
+      ::EnableMenuItem( Custom Menu Command ID, MF_ENABLED | MF_BYCOMMAND );      ::CheckMenuItem( Custom Menu Command ID, MF_BYCOMMAND);      
       return 0;    
     }  
   }
@@ -209,7 +209,7 @@ HRESULT CMyHtmlView::OnShowContextMenu(DWORD dwID, LPPOINT ppt, LPUNKNOWN pcmdtR
   ::SetWindowLong(hwnd, GWL_WNDPROC, (LONG)g_lpPrevWndProc);g_lpPrevWndProc = NULL;
   //m_SubclassWnd.UnsubclassWindow();
 
-  if (iSelection == 自定义的菜单命令ID )
+  if (iSelection == Custom Menu Command ID )
   { 
     ::SendMessage( ::AfxGetMainWnd()->m_hWnd, WM_COMMAND, MAKEWPARAM(LOWORD(lResult), 0x0), 0 );
   }
@@ -227,7 +227,7 @@ HRESULT CMyHtmlView::OnShowContextMenu(DWORD dwID, LPPOINT ppt, LPUNKNOWN pcmdtR
 void CWebBrowserSubclassWnd::OnInitMenuPopup(CMenu* pPopupMenu, UINT nIndex, BOOL bSysMenu) 
 {  
   CWnd::OnInitMenuPopup(pPopupMenu, nIndex, bSysMenu);
-  pPopupMenu->EnableMenuItem( 自定义的菜单命令ID, MF_ENABLED | MF_BYCOMMAND );  pPopupMenu->CheckMenuItem( 自定义的菜单命令ID, MF_BYCOMMAND);
+  pPopupMenu->EnableMenuItem( Custom Menu Command ID, MF_ENABLED | MF_BYCOMMAND );  pPopupMenu->CheckMenuItem( Custom Menu Command ID, MF_BYCOMMAND);
 }
 ```
 
@@ -237,7 +237,7 @@ void CWebBrowserSubclassWnd::OnInitMenuPopup(CMenu* pPopupMenu, UINT nIndex, BOO
 
 看完上面的代码，我们又自然地想到浏览器编程中的另一个问题，那就是“编码”菜单。我们指定，手动建立一个“编码”菜单是比较麻烦的事，而且很难做到与浏览器上下文菜单上的“编码”菜单一样的效果。何不使用上述的方法让浏览器自己建立“编码”菜单和处理相应的命令呢？
 
-具体实现请看下一篇文章《Internet Explorer 编程简述（七）完美的“编码”菜单》
+具体实现请看下一篇文章[《Internet Explorer 编程简述（七）完美的“编码”菜单》](https://eagleboost.com/2004/09/19/Internet-Explorer-%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0-%E4%B8%83-%E5%AE%8C%E7%BE%8E%E7%9A%84-%E7%BC%96%E7%A0%81-%E8%8F%9C%E5%8D%95/)
 
 ### 参考资料
 
