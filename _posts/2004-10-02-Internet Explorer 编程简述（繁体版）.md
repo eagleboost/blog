@@ -2,7 +2,7 @@
 layout:     post
 title:      "Internet Explorer 编程简述（繁体版）" 
 subtitle:   "——谨以怀念研究Internet Explorer编程的青春岁月"
-date:       2004-10-02
+date:       2004-10-02 14:59:00
 author:     "eagleboost"
 header-img: "img/post-bg-belltower.jpg"
 tags:

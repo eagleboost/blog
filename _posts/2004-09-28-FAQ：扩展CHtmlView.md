@@ -2,7 +2,7 @@
 layout:     post
 title:      "FAQ：扩展CHtmlView"
 subtitle:   "——谨以怀念写邮件回答网友关于Internet Explorer编程问题的青春岁月"
-date:       2004-09-28
+date:       2004-09-28 10:42:00
 author:     "eagleboost"
 header-img: "img/post-bg-color-feather.jpg"
 catalog: true

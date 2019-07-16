@@ -2,7 +2,7 @@
 layout:     post
 title:      "Internet Explorer 编程简述（序）"
 subtitle:   "——谨以怀念研究Internet Explorer编程的青春岁月"
-date:       2004-09-03
+date:       2004-09-03 21:29:00
 author:     "eagleboost"
 header-img: "img/post-bg-woodhouse.jpg"
 catalog: true

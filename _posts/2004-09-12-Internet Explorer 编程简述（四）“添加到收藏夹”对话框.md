@@ -2,7 +2,7 @@
 layout:     post
 title:      "Internet Explorer 编程简述（四）“添加到收藏夹”对话框"
 subtitle:   "——谨以怀念研究Internet Explorer编程的青春岁月"
-date:       2004-09-12 00:00:01
+date:       2004-09-12 22:39:00
 author:     "eagleboost"
 header-img: "img/post-bg-gloden-bridge.jpg"
 catalog: true

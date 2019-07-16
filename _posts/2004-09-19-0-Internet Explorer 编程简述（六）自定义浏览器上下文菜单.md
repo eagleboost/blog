@@ -2,7 +2,7 @@
 layout:     post
 title:      "Internet Explorer 编程简述（六）自定义浏览器上下文菜单"
 subtitle:   "——谨以怀念研究Internet Explorer编程的青春岁月"
-date:       2004-09-19 00:00:00
+date:       2004-09-19 21:45:00
 author:     "eagleboost"
 header-img: "img/post-bg-dream.jpg"
 catalog: true

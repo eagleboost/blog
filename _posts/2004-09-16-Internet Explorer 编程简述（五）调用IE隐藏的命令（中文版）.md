@@ -2,7 +2,7 @@
 layout:     post
 title:      "Internet Explorer 编程简述（五）调用IE隐藏的命令（中文版）"
 subtitle:   "——谨以怀念研究Internet Explorer编程的青春岁月"
-date:       2004-09-16
+date:       2004-09-16 00:04:00
 author:     "eagleboost"
 header-img: "img/post-bg-cave.jpg"
 catalog: true
