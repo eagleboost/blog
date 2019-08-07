@@ -49,13 +49,13 @@ tags:
 使用Converter是[最常见的实现方法](https://www.wpftutorial.net/`RadioButton`.html)，即把`RadioButton`.`IsChecked`属性绑定到`ViewModel`对应的属性上，为每个`RadioButton`设置一个`IsChecked`为`True`时对应的值，Converter通过比较该值并转换以达到传递数据的效果。
 
 ```xml
-<!-- 这里的OptionA, OptionB, OptionC是所有可能的值，Converter通过比较Option是否等于当前的ConverterParameter来觉得`IsChecked`是否为`True` -->
-<`RadioButton` Content="A" GroupName="Options" 
-             `IsChecked`="{Binding Path=Option, Mode=TwoWay, Converter={StaticResource OptionConverter}, ConverterParameter=OptionA}" />
-<`RadioButton` Content="B" GroupName="Options" 
-             `IsChecked`="{Binding Path=Option, Mode=TwoWay, Converter={StaticResource OptionConverter}, ConverterParameter=OptionB}" />
-<`RadioButton` Content="C" GroupName="Options" 
-             `IsChecked`="{Binding Path=Option, Mode=TwoWay, Converter={StaticResource OptionConverter}, ConverterParameter=OptionC}" />
+<!-- 这里的OptionA, OptionB, OptionC是所有可能的值，Converter通过比较Option是否等于当前的ConverterParameter来觉得IsChecked是否为True -->
+<RadioButton Content="A" GroupName="Options" 
+             IsChecked="{Binding Path=Option, Mode=TwoWay, Converter={StaticResource OptionConverter}, ConverterParameter=OptionA}" />
+<RadioButton Content="B" GroupName="Options" 
+             IsChecked="{Binding Path=Option, Mode=TwoWay, Converter={StaticResource OptionConverter}, ConverterParameter=OptionB}" />
+<RadioButton Content="C" GroupName="Options" 
+             IsChecked="{Binding Path=Option, Mode=TwoWay, Converter={StaticResource OptionConverter}, ConverterParameter=OptionC}" />
 ```
 
 互斥单选的场景下另一个常见问题（往严重了说是错误）是使用枚举类型，枚举类型不仅带来性能问题（装箱拆箱以及类型解析），也使得实现更为复杂（每个值需要显示为说明性文字）。
@@ -82,6 +82,7 @@ tags:
 好了，就算都是自己的代码，也给数据项对象加了`IsSelected`属性，考虑一下这个场景：在一个交易系统中有成千上万条订单，界面上有多个表格给用户显示订单用，用户甚至可以创建多个表格，每个表格设置不同的过滤条件以缩小范围，比如：
 
 1) 表格一显示所有未成交的订单
+   
 2) 表格二显示所有来自客户A的订单
 
 显然，表格一和表格二中的订单可能存在交集。假设一条订单在内存中只有一个实例（实际上一个设计良好的系统通常如此），那么当用户在表格一选中一条订单时，该订单的`IsSelected`属性会被设置为`True`，如果该订单在表格二中也存在，那么根据数据绑定该订单在表格二中也会呈现选中状态。大多数情况下在用户看来这会是一个错误（有意为之除外）。
