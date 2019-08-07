@@ -2,7 +2,7 @@
 layout:     post
 title:      "M-V-VM下实现数据项的选择（一）"
 subtitle:   "WPF Best Practices"
-date:       2019-08-06
+date:       2019-08-06 21:59:00
 author:     "eagleboost"
 header-img: "img/post-bg-mountain-night.jpg"
 header-mask:  0.3
