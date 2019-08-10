@@ -108,49 +108,6 @@ tags:
 
 其次这种方式不够通用。实际上不论单选，互斥单选还是多选，本质上并没有不同，他们应当能够用统一的方式来实现。假如还沿用这种方式，单选模式下`INotifyCollectionChanged`会显得多余，而对于多选模式而言，假如我们希望`ViewModel`中在每一个数据项被选中或者取消选中的时候得到通知，使用`INotifyCollectionChanged`接口又会比较麻烦。
 
-换言之，`INotifyCollectionChanged`作为一个高度抽象化的内置接口，被人们借过来勉强实现了数据项多选的双向传输，但只能满足最基本的需求，不够用。
+换言之，`INotifyCollectionChanged`作为响应列表改变而抽象化的接口，被人们借过来勉强实现了数据项多选的双向传输，但只能满足最基本的需求，不够用。
 
-我们需要为“选择数据项”定义一套专用的统一接口，姑且称之为`ISelectionContainer`，接口设计如下：
-
-```c#
-  /// <summary>
-  /// ISelectionContainer - 非泛型接口便于UI调用
-  /// </summary>
-  public interface ISelectionContainer
-  {
-    IEnumerable SelectedItems { get; }
-
-    bool this[object item] { get; }
-
-    void Clear();
-
-    void Select(ICollection items);
-
-    void Unselect(ICollection items);
-
-    event EventHandler ItemsCleared;
-
-    event EventHandler<ItemsSelectedEventArgs> ItemsSelected;
-
-    event EventHandler<ItemsUnselectedEventArgs> ItemsUnselected;
-  }
-
-  /// <summary>
-  /// ISelectionContainer - 泛型接口用于实现组件
-  /// </summary>
-  /// <typeparam name="T"></typeparam>
-  public interface ISelectionContainer<T>
-  {
-    IReadOnlyCollection<T> SelectedItems { get; }
-
-    bool this[T item] { get; }
-
-    void Clear();
-
-    void Select(ICollection<T> items);
-
-    void Unselect(ICollection<T> items);
-  }
-```
-
-接下来我们首先会讨论如何为`ISelectionContainer`接口实现一组可重用的组件，把单选，互斥单选及多选通过统一的方式来实现，然后再推广到几个普通方法不容易实现的复杂场景。
+我们需要为“选择数据项”定义一套专用的统一接口，姑且称之为`ISelectionContainer`，接下来首先会讨论为该接口实现一组可重用的组件，把单选，互斥单选及多选通过统一的方式来实现，最后再推广到几个普通方法不容易实现的复杂场景。
