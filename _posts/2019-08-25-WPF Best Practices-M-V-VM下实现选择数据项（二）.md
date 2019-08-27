@@ -22,11 +22,11 @@ tags:
 
 该接口提供了支持数据项选择的所有功能。`SelectedItems`很简单，用于返回当前选中的所有数据项。`Clear/Select/Unselect`几个方法用于改变选中列表，比如当界面控件的`SelectionChanged`事件发生时可以调用这几个方法把数据传递到`ViewModel`。而`ItemsCleared/ItemsSelected/ItemsUnselected`事件则用于在`ViewModel`改变选中的数据项触发事件通知界面控件更新选中状态。
 
-需要重点提到的时索引器。代码中常常需要检查某个数据项是否被选中，传统方式有
+需要重点提到的是索引器。代码中常常需要检查某个数据项是否被选中，传统方式有：
 
-+ 调用扩展方法`Contains`检查`SelectedItems`。效率一般不高，因为`SelectedItems`的具体实现一遍没有对索引做优化。
++ 调用扩展方法`Contains`检查`SelectedItems`。效率通常不高，因为`SelectedItems`的具体实现一般没有对索引做优化。
   
-+ 提供`IsSelected(object item)`方法。最常见，但我们都知道方法调用对于数据绑定并不友好。就算我们通过一些蹩脚的方式在`XAML`里面调用了`IsSelected`方法，如果选中状态发生了改变需要更新界面还是会头疼。
++ 提供`IsSelected(object item)`方法。此方法最常见，但我们都知道方法调用对于数据绑定并不友好。就算我们通过一些蹩脚的方式在`XAML`里面调用了`IsSelected`方法，如果选中状态发生了改变需要更新界面还是会头疼。
 
 使用索引器的好处在于`WPF`的数据绑定对索引器有原生支持，所以只要能想办法创建数据绑定，`ViewModel`触发的`PropertyChanged`事件就能被界面代码接收到，界面更新便顺理成章实现了。
 
