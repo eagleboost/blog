@@ -13,7 +13,7 @@ public DispatcherOperation BeginInvoke(Action action, DispatcherPriority priorit
 用起来很简单，然而却存在几个难以回避的问题：
 1. 不便于单元测试——为某个显式使用了`Dispatcher`的`ViewModel`写单元测试会非常麻烦。一来`Dispatcher`需要`STA`线程，但测试常常不需要验证延迟行为，而且创建`STA`线程会对测试环境造成不小的压力。二来就算有了`Dispatcher`，其延迟执行的行为测试起来也令人头痛。
    
-2. 添加到执行队列的操作无法取消——道理上来说`BeginInvoke`一个`Action`跟创建一个`Task`类似，但却不能像`Task`一样可以通过`CancellationToken`来取消。一个被`BeginInvoke`了`n`次的`Action`也必然会执行n次，这有时不是我们想要的。
+2. 添加到执行队列的操作无法取消——道理上来说`BeginInvoke`一个`Action`跟创建一个`Task`类似，但却不能像`Task`一样可以通过`CancellationToken`来取消。一个被`BeginInvoke`了`n`次的`Action`也必然会执行`n`次，这有时不是我们想要的。
    
 3. 与异步风格的代码格格不入。
 
@@ -34,7 +34,7 @@ public DispatcherOperation<TResult> InvokeAsync<TResult>(
   CancellationToken ct)
 ```
 
-回到第一个问题，关于单元测试。为了便于测试和节省资源，应该避免直接使用`Dispatcher`。一种做法是抽象出一个包含`BeginInvoke`方法的`IDispatcher`接口，这样就可以`mock`该接口来测试。但问题在于对`callback`的`mock`需要额外的setup，不同的`mock`框架做法不尽相同，但总的来说想要在测试中断言`BeginInvoke`的方法被调用所需要的准备工作并不容易。
+回到第一个问题，关于单元测试。为了便于测试和节省资源，应该避免直接使用`Dispatcher`。一种做法是抽象出一个包含`BeginInvoke`方法的`IDispatcher`接口，这样就可以`mock`该接口来测试。但问题在于对`callback`的`mock`需要额外的`setup`，不同的`mock`框架做法不尽相同，但总的来说想要在测试中断言`BeginInvoke`的方法被调用所需要的准备工作并不容易。
 
 既然`BeginInvoke`这种`callback`的做法对测试并不友好，我们就需要换一个角度来思考。当调用`BeginInvoke`的时候开发者想要的是＂把这个`Action`添加到`ApplicationIdle`任务队列，等`Dispatcher`开始处理该队列的时候执行它＂，它等价于＂`Dispatcher`开始处理`ApplicationIdle`队列的时候通知我，我将执行这个`Action`＂。
 
@@ -132,8 +132,7 @@ private Task DoSomethingAsync()
 
 ```c#
 ////首先定义一个IAwaitable的通用接口，实现该接口的对象即可被await
-public interface IAwaitable<out T, out TResult> : INotifyCompletion
-  where T : class
+public interface IAwaitable<out T, out TResult> : INotifyCompletion where T : class
 {
   T GetAwaiter();
 
