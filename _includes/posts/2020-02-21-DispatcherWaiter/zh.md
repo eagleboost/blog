@@ -22,7 +22,7 @@ public DispatcherOperation BeginInvoke(Action action, DispatcherPriority priorit
 先说第三问题。从上面的签名可以看到`BeginInvoke`实际上返回了一个`DispatcherOperation`，而后者是可以被`await`的，所以下面的代码合法：
 
 ```c#
-await Dispatcher.BeginInvoke(() => DoSomething() );
+await Dispatcher.BeginInvoke(() => DoSomething());
 ```
 
 但是在需要返回值的情况下`BeginInvoke`就不适用了。好在`dotnet 4.5`中增加了新的`InvokeAsync`方法，为异步返回值和用于取消的`CancellationToken`提供了支持，于是第二个问题也顺带被解决了。
@@ -38,7 +38,7 @@ public DispatcherOperation<TResult> InvokeAsync<TResult>(
 
 既然`BeginInvoke`这种`callback`的做法对测试并不友好，我们就需要换一个角度来思考。当调用`BeginInvoke`的时候开发者想要的是＂把这个`Action`添加到`ApplicationIdle`任务队列，等`Dispatcher`开始处理该队列的时候执行它＂，它等价于＂`Dispatcher`开始处理`ApplicationIdle`队列的时候通知我，我将执行这个`Action`＂。
 
-于是问题就立刻变简单了，假设有这样一个接口。
+于是问题就立刻变简单了，假设有这样一个接口:
 
 ```c#
 public interface IDispatcherWaiter
@@ -94,7 +94,7 @@ public class DispatcherWaiter :IDispatcherWaiter
 
 `await DispatcherOperation`的行为等价于`ConfigureAwait(true)`，所以上面两个`DoSomethingAsync()`方法中`DoSomething()`最终会在主线程上被调用的前提是`DoSomethingAsync()`在主线程上被调用。
 
-假如`DoSomethingAsync()`在某个后台线程X被调用，如下所示，那么当`WaitAsync`结束时`DoSomething()`会在线程X上执行，这可能会导致与`BeginInvoke(()=> DoSomething() )`不同的行为，因为`BeginInvoke`的`callback`是在`Dispatcher`所在的线程上执行的。
+假如`DoSomethingAsync()`在某个后台线程X被调用，如下所示，那么当`WaitAsync`结束时`DoSomething()`会在线程X上执行，这可能会导致与`BeginInvoke(()=> DoSomething())`不同的行为，因为`BeginInvoke`的`callback`是在`Dispatcher`所在的线程上执行的。
 
 ```c#
 private Task DoSomethingFirstAsync()
@@ -107,7 +107,7 @@ private Task DoSomethingFirstAsync()
 }
 ```
 
-与`BeginInvoke(()=> DoSomething() )`等价的行为应该是这样：
+与`BeginInvoke(()=> DoSomething())`等价的行为应该是这样的（请看注释）：
 
 ```c#
 private Task DoSomethingAsync()
@@ -241,7 +241,7 @@ public class DispatcherWaiter : IDispatcherWaiter
 总结一下使用方式：
 
 ```c#
-////Async/Await风格
+////async/await风格
 private async Task DoSomethingAsync(CancellationToken ct)
 {
   var status = await waiter.WaitAsync(DispatcherPriority.ApplicationIdle, ct);
@@ -251,7 +251,7 @@ private async Task DoSomethingAsync(CancellationToken ct)
   }
 }
 
-////类似于BeginInvoke(()=> DoSomething() )的传统风格
+////类似于BeginInvoke(()=> DoSomething())的传统风格
 private DoSomething(CancellationToken ct)
 {
   waiter.WaitAsync(DispatcherPriority.ApplicationIdle, ct).OnCompleted(() =>

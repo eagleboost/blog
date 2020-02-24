@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "从BeginInvoke到Async/Await"
-subtitle:   "BeginInvoke to Async/Await"
+title:      "从BeginInvoke到async/await"
+subtitle:   "Convert BeginInvoke to async/await"
 date:       2020-02-21
 author:     "eagleboost"
 header-img: "img/post-bg-mountain-night.jpg"
@@ -10,7 +10,7 @@ catalog: true
 multilingual: true
 tags:
     - Dispatcher
-    - Async/Await
+    - async/await
     - BeginInvoke
     - Task
     - Unit Test
