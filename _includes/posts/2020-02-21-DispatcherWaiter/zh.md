@@ -284,5 +284,11 @@ private async Task DoSomethingAsync(CancellationToken ct)
 }
 ```
 
+**<u>注</u>**: 完整实现请移步[github](https://github.com/eagleboost/BeginInvokeToAsyncAwaitApp)。
+最后附上测试结果：
+
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/BlogImages/BeginInvokeToAsyncAwait.png)
+
+
 ## 参考资料
 + [await anything](https://devblogs.microsoft.com/pfxteam/await-anything/)

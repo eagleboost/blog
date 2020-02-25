@@ -284,5 +284,9 @@ private async Task DoSomethingAsync(CancellationToken ct)
 }
 ```
 
+**<u>ps</u>**: Visit [github](https://github.com/eagleboost/BeginInvokeToAsyncAwaitApp) for source code, and here's test results：
+
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/BlogImages/BeginInvokeToAsyncAwait.png)
+
 ## Reference
 + [await anything](https://devblogs.microsoft.com/pfxteam/await-anything/)
