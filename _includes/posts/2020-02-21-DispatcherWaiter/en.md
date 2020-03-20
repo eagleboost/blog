@@ -224,9 +224,16 @@ public class DispatcherWaiter : IDispatcherWaiter
     }
     else
     {
-      var op = _dispatcher.InvokeAsync(() => { }, _priority, _ct);
-      op.Completed += (s, e) => continuation();
-      op.Aborted += (s, e) => continuation();
+      try
+      {
+        var op = _dispatcher.InvokeAsync(() => { }, _priority, _ct);
+        op.Completed += (s, e) => continuation();
+        op.Aborted += (s, e) => continuation();
+      }
+      catch (Exception)
+      {
+        continuation();
+      }
     }
   }
 
@@ -242,10 +249,7 @@ public class DispatcherWaiter : IDispatcherWaiter
 
   public IDispatcherWaiter CheckedWaitAsync()
   {
-    return new DispatcherWaiter(_dispatcher)
-    {
-      _isCompleted = _dispatcher == Dispatcher.CurrentDispatcher
-    };
+    return new DispatcherWaiter(_dispatcher) {_isCompleted = _dispatcher.CheckAccess()};
   }
 
   public IDispatcherWaiter WaitAsync(DispatcherPriority priority = DispatcherPriority.Normal, CancellationToken ct = default(CancellationToken))
