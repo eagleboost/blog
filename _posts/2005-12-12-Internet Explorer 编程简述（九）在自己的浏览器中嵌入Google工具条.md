@@ -10,7 +10,7 @@ tags:
     - Internet Explorer编程简述
     - Internet Explorer编程
     - Google Toolbar
-    - `Explorer Bars`
+    - Explorer Bars
     - ToolBands
     - IObjectWithSite
     - IDeskBand
