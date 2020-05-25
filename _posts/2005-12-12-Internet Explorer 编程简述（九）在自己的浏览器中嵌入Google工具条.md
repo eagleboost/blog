@@ -50,6 +50,12 @@ tags:
  
 随着IE的发展，各种类型的扩展遍地开花，其中最为引人注目的，当属地址栏扩展和工具条扩展（几乎成了兵家必争之地）。本文讨论的主题，正是工具条的扩展。
 
+> 此处有个小插曲。[csdn原文](https://blog.csdn.net/CathyEagle/article/details/550698)中的全部图片经已失效，之前的系列文章我都在[Google Image](https://www.google.com/search?q=Internet+Explorer+%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0%EF%BC%88%E4%B9%9D%EF%BC%89%E5%9C%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E5%B5%8C%E5%85%A5Google%E5%B7%A5%E5%85%B7%E6%9D%A1&newwindow=1&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi428Sk6c3pAhUF1qwKHdoiCRcQ_AUoAnoECBUQBA)找到了其他网站转载的图片，但这一篇死活找不到。好在最后发现“有人”把全文打包成`Word`文档放在[百度文库](https://wenku.baidu.com/view/8cfbd56eb84ae45c3b358ce8.html?pn=51)供人收费下载。我没有百度文库`VIP`下不了，所幸在线浏览还开放，于是屏幕截图了事。
+
+> 尝试下载的时候还有如下界面，其中“版权人”的定义不详，但我想大概率不会是我。
+
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/BlogImages/Baidu_Wenku.png)
+
 
 ### 2. 问题的提出
 
