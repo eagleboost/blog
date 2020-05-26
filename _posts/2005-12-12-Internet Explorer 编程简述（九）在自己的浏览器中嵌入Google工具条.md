@@ -118,11 +118,11 @@ public:
 //IUnknown methods
 STDMETHODIMP CIESimulator::QueryInterface( REFIID riid, void **ppv )
 {
-  if ( riid == IID_IInputObjectSite )  //这个接口需要自己处理
+  if ( riid == IID_IInputObjectSite ) //这个接口需要自己处理
   {
     *ppv = static_cast<IInputObjectSite*>(this);
   }
-  else if ( m_pwb )  //其它的交给`WebBrowser Control`去处理
+  else if ( m_pwb ) //其它的交给`WebBrowser Control`去处理
   {
     m_pwb->QueryInterface( riid, ppv );
   }
@@ -132,7 +132,7 @@ STDMETHODIMP CIESimulator::QueryInterface( REFIID riid, void **ppv )
 //IInputObjectSite specific methods
 STDMETHODIMP CIESimulator::OnFocusChangeIS(IUnknown* punkObj, BOOL fSetFocus)
 {
-  return S_OK;  //此处我们简单地返回
+  return S_OK; //此处我们简单地返回
 }
 
 void CIESimulator::SetIWebBrowser2(IWebBrowser2* pwb)
@@ -153,7 +153,6 @@ enum eBANDTYPE
   btHorizontal = 1
 };
 
- 
 enum eBANDSTATE
 {
   bsUnInitialized = -1,
@@ -161,7 +160,7 @@ enum eBANDSTATE
   bsInVisible = 1,
   bsUnLoaded = 2
 };
- 
+
 typedef struct tagIEBANDINFO
 {
   char szCLSID[39];
@@ -183,7 +182,7 @@ void CIEBandPlugInManager::GetAllBandCLSID(void)
   LPIEBANDINFO pIEBandInfo;
   pIEBandInfo = new IEBANDINFO();
 
-  strcpy( pIEBandInfo->szCLSID, "{2318C2B1-4965-11d4-9B18-009027A5CD4F}/0");  //Google Toolbar的CLSID
+  strcpy( pIEBandInfo->szCLSID, "{2318C2B1-4965-11d4-9B18-009027A5CD4F}/0"); //Google Toolbar的CLSID
 
   strcpy( pIEBandInfo->szName, GetDisplayName(pIEBandInfo->szCLSID) );
 
@@ -192,7 +191,7 @@ void CIEBandPlugInManager::GetAllBandCLSID(void)
   pIEBandInfo->eBandType = btHorizontal;
   pIEBandInfo->eBandState = bsUnInitialized;
   m_oaBand.Add( (CObject*)pIEBandInfo );//m_oaBand是一个CObArray
-｝
+}
 
 //根据CLSID从注册表获取Band的名称
 CString CIEBandPlugInManager::GetDisplayName(CString strCLSID)
@@ -225,8 +224,7 @@ bool CIEBandPlugInManager::ActivateBand( CString strCLSID )
     return false;
   }
 
- 
-  WCHAR wsz[MAX_PATH]; 
+  WCHAR wsz[MAX_PATH];
   ::MultiByteToWideChar(CP_ACP, 0, strCLSID, -1, wsz, MAX_PATH);
 
   CLSID clsid;
@@ -241,7 +239,7 @@ bool CIEBandPlugInManager::ActivateBand( CString strCLSID )
   if (FAILED(hr))
     return false;
 
-  DoQueryBandInfo( pIEBandInfo );  //查询Band对象实例的信息
+  DoQueryBandInfo( pIEBandInfo ); //查询Band对象实例的信息
 
   switch( pIEBandInfo->eBandType )
   {
@@ -278,20 +276,20 @@ void CIEBandPlugInManager::DoQueryBandInfo(LPIEBANDINFO pIEBandInfo)
   //查询IObjectWithSite接口
   HRESULT hr = pIEBandInfo->puk->QueryInterface(IID_IObjectWithSite, (void**)&pOWS);
   if (SUCCEEDED(hr))
-  {     //设置Site
+  { //设置Site
     pOWS->SetSite( (IUnknown *)&m_IESimulator ); //m_IESimulator是CIESimulator的一个实例对象，对Band对象而言，它就像IE
   }
- 
+
   IDeskBand *pdb;
   hr = pIEBandInfo->puk->QueryInterface(IID_IDeskBand, (void**)&pdb);
   if (SUCCEEDED(hr))
-  {     //查询得到Band对象窗口的句柄，稍候通过该句柄将Band对象的窗口嵌入我们指定的窗口
+  { //查询得到Band对象窗口的句柄，稍候通过该句柄将Band对象的窗口嵌入我们指定的窗口
     pdb->GetWindow(&pIEBandInfo->hBand);
   }
 
   ShowBand(pIEBandInfo, TRUE);//显示Band
 }
- 
+
 bool CIEBandPlugInManager::ShowBand(LPIEBANDINFO pIEBandInfo, bool bShow)
 {
   IDockingWindow *pdw;
