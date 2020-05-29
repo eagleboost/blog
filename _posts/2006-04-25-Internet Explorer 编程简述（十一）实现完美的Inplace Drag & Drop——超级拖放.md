@@ -61,7 +61,7 @@ STDMETHODIMP CHtmlControlSite::XDocHostUIHandler::GetDropTarget(LPDropTarget pDr
 其中`g_pDropTarget`指向某个全局的`IDropTarget`接口的实现，我们假定为`CIEDropTarget`，`CIEDropTarget`实现了`IDropTarget`的几个成员函数`DragEnter`、`DragOver`、`DragLeave`和`Drop`。在`DragEnter`中可以决定是否接受一个`Drop`以及如果接受这个`Drop`的话该提供怎样的鼠标拖拽反馈，在持续触发的`DragOver`中同样可以设定鼠标拖拽反馈，从而实现在拖放不同的对象（文字、链接、图像等）时提供不同的拖拽视觉效果，实现相当简单，此处不再赘述。
 但上面的实现存在一些问题。首先是选中的文字在页面内与输入框之间交互的拖放没有了。这是自然的，既然我们用自定义的`DropTarget`替换掉了`IE`的缺省实现，那这种交互的拖放理应由我们自己实现。难处并非在于不能实现，而是在于实现起来比较麻烦——光是得到鼠标下的`HTML Element`就够我们烦了；当输入框中有文字的时候，光标还应该随着鼠标的移动而移动——所以这个费力还不一定讨好的功能似乎没有哪个浏览器去做。其次，作为输入框文字拖放的衍生物，拖拽滚动没有了。当鼠标向某个方向拖拽时，网页应该随着将不可见的部分滚动出来，比如某个输入框，让我们有机会将文字拖拽过去。这个`Feature`的实现并不困难，不过一来是被忽略了（注意到拖拽滚动的人并不多），二来主要`Feature`都没有实现，这个滚动也意义不大了。
 
-### 3. 打入`MSHTML`内部
+### 3. 打入MSHTML内部
 
 既然从`GetDropTarget`提供外部实现难以得到与输入框的交互式拖放，那就换个角度来考虑问题，让我们打入`MSHTML`的内部。
 着手点是`IHTMLDocumentX`接口——操纵`IE`的`DOM`的法宝。我们注意到`IHTMLDocument2`有个`ondragstart`事件，进而想到应该也有诸如`ondragenter`、`ondragover`、`ondrop`之类的事件（事实上也是有的），如果响应这些事件，处理同输入框的交互式拖放应该就能够解决。因为这些拖放在`MSHTML`的缺省`DropTarget`实现中发生，因而当鼠标拖拽到某个输入框上时，肯定会触发一个`ondragover`事件，而在`IHTMLEventObj`的辅助下我们能轻松得到相关的`HTML Element`，其它的操作就容易进行了。再细心一点，我们还发现`IHTMLEventObj2`接口有个`dataTransfer`属性——可以得到一个`IHTMLDataTransfer`的指针，而`IHTMLDataTransfer`接口正是浏览器内部用于数据交换的重要手段之一（看看它的属性就知道会很有用了）：
