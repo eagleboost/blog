@@ -110,7 +110,7 @@ private Task DoSomethingFirstAsync()
 与`BeginInvoke(()=> DoSomething())`等价的行为应该是这样的（请看注释）：
 
 ```c#
-private Task DoSomethingAsync()
+private async Task DoSomethingAsync()
 {
   ////此处为任何线程
   await waiter.WaitAsync(DispatcherPriority.ApplicationIdle);
