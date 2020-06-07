@@ -314,6 +314,7 @@ private async Task DoSomethingAsync()
 
 It's fairly easy to extend the theory to `ConfigureAwait(DispatcherWaiter)`, that can be covered in some other posts.
 
+Please visit [github](https://github.com/eagleboost/DispatcherTaskAwaiterApp) for the full implementations.
 
 ## References
 + [await anything](https://devblogs.microsoft.com/pfxteam/await-anything/)
