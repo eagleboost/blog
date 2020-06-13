@@ -312,7 +312,7 @@ private async Task DoSomethingAsync()
 
 上述代码扩展为`ConfigureAwait(DispatcherWaiter)`极其容易，不再赘述。
 
-本文所有代码请移步[github](https://github.com/eagleboost/DispatcherTaskAwaiterApp)。
+本文所有代码请移步[*github*](https://github.com/eagleboost/DispatcherTaskAwaiterApp)。
 
 
 ## 参考资料
