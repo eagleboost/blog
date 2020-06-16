@@ -13,6 +13,7 @@ tags:
     - 资源字典
     - WPF
     - WPF高级编程
+    - Advanced WPF
 ---
 
 <!-- Chinese Version -->
