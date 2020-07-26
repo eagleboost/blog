@@ -32,7 +32,7 @@ tags:
 一般说来，在`Windows`中用户通过键盘转移焦点（`Focus`）有两个方法：第一，对于输入框附近有标签提示的情况，按住`Alt`+某个预设的字母（`Accelerator`，加速键）将焦点快速转移到输入框。如下图所示，按下“`Alt+D`”，焦点应转移到地址输入框；按下“`Alt+G`”，焦点应转移到搜索框（本文对此不做讨论）。第二，按住`Tab`键，焦点转移到由应用程序控制的下一个可获得焦点的窗口；按下``Shift+Tab``，焦点转移到上一个可获得焦点的窗口。如下图所示，如果地址输入框是当前获得焦点的窗口，则按下Tab时，焦点应转移到搜索框，再按下``Shift+Tab``，焦点应回到地址输入框。
  
 
-![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/BlogImages/ReBarFocus.jpg)
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/ReBarFocus.jpg)
 
  
 焦点的设置和转移对于用户体验（`Experience`）来说是细微体贴而又重要的设计，但不幸的是不少`Windows`应用程序都或多或少犯了一些错误：
@@ -84,7 +84,7 @@ tags:
 
 + 例3：假设当前焦点位于“搜索记录”，按下`Shift+Tab`键不松开，焦点转移的顺序应是：“搜索记录”，“个性化主页”，“搜索栏”，“地址栏”，“将`Google`设为首页”……“搜索记录”……
 
-![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/BlogImages/AllFocus.jpg)
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/AllFocus.jpg)
 
 
 ### 4. 工具条输入框之间的焦点转移

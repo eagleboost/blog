@@ -34,13 +34,13 @@ tags:
 
 + 嵌入式面板型扩展，包括`Explorer Bars`（如收藏夹、搜索、历史等嵌入`IE`主窗口的大型面板）, `Tool Bands`（如`Google Toolbar`、`MSN Toolbar`等嵌入`IE`的工具条）, 和`Desk Bands`（如快速启动这类嵌入任务栏的面板，实际上是`Explorer`外壳的扩展）。这几种面板的编写方法相差无几，不同之处主要在于向系统注册方式的不同。
 
-![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/BlogImages/Explorer_Bars.png)
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/Explorer_Bars.png)
 `Explorer Bars`
 
-![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/BlogImages/Tool_Bands.png)
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/Tool_Bands.png)
 `Tool Bands`
 
-![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/BlogImages/Desk_Bands.png)
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/Desk_Bands.png)
 `Desk Bands`
 
 + 是参数型扩展，包括为浏览器增加上下文菜单项（调用脚本）、为浏览器主菜单增加菜单项、为浏览器“标准按钮”工具条添加按钮等。
@@ -310,7 +310,7 @@ bool CIEBandPlugInManager::ShowBand(LPIEBANDINFO pIEBandInfo, bool bShow)
 
 下面是我测试把`Google`工具条嵌入我自己写的浏览器的一个截图，`Google`的搜索、广告窗口拦截均可正常工作。
 
-![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/BlogImages/Embedded_Google_Toolbar_Demo.png)
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/Embedded_Google_Toolbar_Demo.png)
 
 
 ### 5. 总结
