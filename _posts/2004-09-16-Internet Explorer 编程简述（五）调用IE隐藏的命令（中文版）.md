@@ -24,6 +24,9 @@ tags:
 
 概述除了“`整理收藏夹`”和“`添加到收藏夹`”对话框外，还有其它一些对话框是我们希望直接通过`WebBrowser`调用的，比如“导入/导出”对话框，用一般的方法很难调用。`IShellUIHelper`尽管提供了`ImportExportFavorites`方法，但结果只是显示一个选择文件的对话框，且只能导入/导出收藏夹而不能对Cookies操作。
 
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/ImportExportWizard.jpg)
+
+
 ### 2. 契机
 
 MSDN中有一篇叫“[WebBrowser Customization](https://msdn.microsoft.com/en-us/ie/aa770041(v=vs.94))”的文章，其中介绍了通过`IDocHostUIHandler.ShowContextMenu`方法自定义`WebBrowser`上下文菜单的方法。其原理是从“`shdoclc.dll`”的资源中创建菜单，作一些修改之后用`TrackPopupMenu`函数（注意在标志中包含TPM_RETURNCMD）将菜单弹出，然后把返回的Command ID发送给“``Internet Explorer_Server``”窗口进行处理。
@@ -50,6 +53,8 @@ LRESULT lr = ::SendMessage(hwnd, WM_COMMAND, iSelection, NULL);
 ![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/eXeScope.jpg)
 
 我们要做的，就是将这些ID发送到“`Internet Explorer_Server`”窗口进行处理。问题是`WebBrowser`其实是一个OLE容器，我们使用的CHtmlView又是更外层的封装，他们的m_hWnd成员变量并不是IE窗口的句柄，如何找到我们需要的句柄呢？请看下面的图：
+
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/Internet_Explorer_Server.jpg)
 
 根据图中显示的从属关系，顺藤摸瓜，最内层的窗口“`Internet Explorer_Server`”的句柄就是我们需要的东西。为了简化问题，我这里使用了来自MSDN Magazine资深专栏撰稿人Paul Dilascia的CFindWnd类，非常好用。
 
@@ -204,6 +209,9 @@ end;
 1. 用InvokeIEServerCommand(`ID_IE_CONTEXTMENU_ADDFAV`)调用“添加到收藏夹”对话框时需要注意的是，IE接收到`ID_IE_CONTEXTMENU_ADDFAV`命令时是对网页中`当前被选中的链接`来执行“添加到收藏夹”操作的，如果没有选中的链接，才是将当前网页添加到收藏夹。
 2. 新建IE窗口。这是浏览器编程中的难题之一，即从当前窗口新建一个`Internet Explorer`窗口，完全复制当前页的内容（包括“前进”、“后退”的状态），这可以通过InvokeShellDocObjCommand(`ID_IE_FILE_NEWWINDOW`)来实现。
 3. 显示IE的版本信息。调用InvokeShellDocObjCommand(`ID_IE_HELP_ABOUTIE`)。
+   
+   ![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/About_IE.jpg)
+
 4. InvokeShellDocObjCommand(`ID_IE_FILE_PRINT`)调出的“打印”对话框是非模态的（我们不太清楚Microsoft的设计意图，我认为“打印”对话框应该是模态的），显示模态窗口的方法请参加我的另一篇文章[《利用`WH_CBT Hook`将非模态对话框显示为模态对话框》](https://eagleboost.com/2004/09/13/%E5%88%A9%E7%94%A8WH_CBT-Hook%E5%B0%86%E9%9D%9E%E6%A8%A1%E6%80%81%E5%AF%B9%E8%AF%9D%E6%A1%86%E6%98%BE%E7%A4%BA%E4%B8%BA%E6%A8%A1%E6%80%81%E5%AF%B9%E8%AF%9D%E6%A1%86/)
 
 ### 参考资料：

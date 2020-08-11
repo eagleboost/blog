@@ -31,6 +31,8 @@ Internet Explorer提供了非常开发的接口，使开发人员不仅可以把
    
 2) 将新增的键的默认值设置为一个包含脚本的网页的URL（或文件路径全名），该网页中的脚本将在用户点击上下文菜单中的“Google Search”后被浏览器执行。
 
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/GoogleSearchRegedit.jpg)
+
 3) 在新增的键下还可以新建一个二进制值Contexts，用以指定我们新增的菜单项针对特定的网页对象是否出现，其取值可以是如下值的组合（逻辑或）
 
 | Context       | Value |
@@ -232,6 +234,8 @@ void CWebBrowserSubclassWnd::OnInitMenuPopup(CMenu* pPopupMenu, UINT nIndex, BOO
 ```
 
 下面的图片显示了将“文字大小”菜单项添加到“编码”菜单项的下面的效果。
+
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/FontSizeAfterEncode.jpg)
 
 ### 5. 新的问题
 

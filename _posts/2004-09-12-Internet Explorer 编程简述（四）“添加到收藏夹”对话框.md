@@ -165,6 +165,9 @@ HRESULT CMyHtmlView::CreateInternetShortcut(LPCSTR pszURL, LPCSTR pszURLfilename
  
 好，上面的方法虽然麻烦一点，但总算解决了“模态窗口”的问题，使得我们的程序不至于让用户鄙视。但是问题又来了，我们发现“允许脱机使用”是Disabled的，那“自定义”也就无从谈起了，尽管90%的人都没有使用过IE提供的脱机浏览。
 
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/AddToFavDlg_OfflineUse.jpg)
+
+
 难道我们的希望要破灭吗？我们一方面想像调用“`AddFavorite`”函数一样的不必手动创建链接，一方面又要模态显示窗口，就像IE那样，还能自定义脱机浏览。
 
 ### 4. 脚本方式

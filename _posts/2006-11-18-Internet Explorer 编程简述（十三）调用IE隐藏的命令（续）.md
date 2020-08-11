@@ -202,7 +202,7 @@ void CMainFrame::OnDropDown( NMHDR* pNotifyStruct, LRESULT* pResult )
 
 在浏览https的网站时，浏览器的状态栏应显示“锁”图标，表示该页面使用了`xxx`位的`SSL`加密，双击该图标即可显示该站点的证书信息。这个命令`ID`就用来显示站点的证书对话框，当然对于没有加密的页面，调用的结果会显示“该类文档没有安全证书”。
 
-![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/DlgZone.jpg)
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/DlgCertificate.jpg)
 
 
 5) 安全区域设置对话框
@@ -214,7 +214,7 @@ void CMainFrame::OnDropDown( NMHDR* pNotifyStruct, LRESULT* pResult )
 与上面类似，当浏览器在不同的`Zone`之间切换时，状态栏应显示图标和文字以表示当前站点所处的`Security Zone`，双击改栏则显示安全区域属性页，用户可修改安全区域的设置。该命令`ID`可显示此对话框。
 
 
-![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/DlgCertificate.jpg)
+![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/cathyeagle/DlgZone.jpg)
 
 6) 管理加载项对话框
 
