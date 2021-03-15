@@ -21,6 +21,8 @@ CallSomethingAsync().ContinueWith(t =>
 
 我们需要一种简洁而优雅的方式来处理`Task`的异常。
 
+> 注：此处`Task`特指`fire and forget`的那种任务，比如在一个按钮的`Click`事件里发起一个异步调用，上下文本身已有对`Task`异常有处理的情况不在讨论之列。
+
 
 ## 2. 分析
 

@@ -21,6 +21,7 @@ This is perfectly fine for small applications or some `POC`, but it would likely
 
 We need some simpler way to handle the `Task` exceptions gracefully.
 
+> Note that the `Task` here refers to the `fire and forget` tasks like async calls invoked from event handlers of `Button.Click`.
 
 ## 2. Analysis
 
