@@ -193,7 +193,7 @@ public readonly struct DispatchTaskAwaiter : ICriticalNotifyCompletion
     
   public void OnCompleted(Action continuation)
   {
-    ////This is not called
+    ////This is not called, check out https://devblogs.microsoft.com/pfxteam/whats-new-for-parallelism-in-net-4-5-beta/ for more details
     throw new NotImplementedException();
   }
 
