@@ -81,4 +81,4 @@ Application.Current.DispatcherUnhandledException += (_, e) =>
 
 在某些情况下下我们甚至可以省去`WhenFaultedAsync`这样的扩展方法。比如一个使用了`Unity Container`的系统可以通过`Interception`截获某个类（通常是实现了某些接口的`Service`）的所有异步调用，并动态生成代码来隐式调用`WhenFaultedAsync`，这对于有清晰层级划分的系统来说可以一定程度简化应用层代码的维护。
 
-完成实现请移步[*github*](https://github.com/eagleboost/HandleTaskException)
+完整实现请移步[*github*](https://github.com/eagleboost/HandleTaskException)
