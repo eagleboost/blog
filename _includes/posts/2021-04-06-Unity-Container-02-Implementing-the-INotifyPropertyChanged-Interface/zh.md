@@ -79,7 +79,7 @@ container.RegisterType<IViewModel, ViewModel>(interceptor, behavior);
 
 ## 3. Reflection.Emit
 
-终极的解决方案是通过`Reflection.Emit`动态生成代码。`Reflection.Emit`也是[PostSharp](https://www.postsharp.Net/)之类`AOP`库的基础。实际上在上述`Interception`方法里`Unity Container`也动态生成了一个`Proxy`类，只不过其目的是为了允许开发人员添加自定义代码。
+终极的解决方案是动态生成代码。一种方法是在运行时通过`Reflection.Emit`动态生成代码，另一种是在`MSBuild`的`post process`阶段根据`Attribute`之类的配置生成代码并修改`Assembly`。[PostSharp](https://www.postsharp.Net/)之类`AOP`库使用的就是第二种方法。两种方法归根到底都是操作`IL`代码，本文只讨论在运行时生成代码的方式。实际上在上述`Interception`方法里`Unity Container`也使用`Reflection.Emit`动态生成了一个`Proxy`类，只不过其目的是为了允许开发人员添加自定义代码。
 
 > `PostSharp`对实现`INotifyPropertyChanged`接口也提供了[支持](https://doc.postsharp.Net/inotifypropertychanged)，不过`PostSharp`并非免费，其实现也与我们将要提到的方法大同小异。
 

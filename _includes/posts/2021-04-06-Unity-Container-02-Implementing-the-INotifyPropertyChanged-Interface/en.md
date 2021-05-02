@@ -79,7 +79,7 @@ It works, but has problems：
 
 ## 3. Reflection.Emit
 
-The ultimate solution is to dynamically generate codes via `Reflection.Emit`. `Reflection.Emit` is also the foundation of `AOP` libraries like [PostSharp](https://www.postsharp.Net/). For the `InterceptionBehavior` above, `Unity Container` internally also creates a `Proxy` class by using `Reflection.Emit`, just that its purpose is to expose something to allow developers put custom logic in the behaviors.
+The ultimate solution is to dynamically generate codes. One way is to generate codes at run time via `Reflection.Emit`, another way is to run some MSBuild post process tasks to generate codes based configurations like attribute and edit the assemblies. `AOP` libraries like [PostSharp](https://www.postsharp.Net/) work in this way. In the end these two approaches are both manipulating IL, but we'll only talk about the first approach in this blog. For the `InterceptionBehavior` above, `Unity Container` internally also creates a `Proxy` class via `Reflection.Emit`, just that its purpose is to expose something to allow developers put custom logic in the behaviors.
 
 > `PostSharp` also provides [support](https://doc.postsharp.Net/inotifypropertychanged) to implement `INotifyPropertyChanged`, but `PostSharp` is not free and its approach is similar to what we're going to talk about.
 
@@ -112,7 +112,7 @@ public class NotifyPropertyChangedImplStrategy : BuilderStrategy
 
 Although the `Reflection.Emit` approach can save us repeated works, but there're still rooms to improve:
 
-First of all, it's debug friendly. Since the property setter is emitted `IL` codes, so there're no source codes to set break points in the setter, there're workarounds but not convenient.
+First of all, it's not debug friendly. Since the property setter is emitted `IL` codes, so there're no source codes to set break points in the setter, there're workarounds but not convenient.
 
 Second, the `INotifyPropertyChanged` interface is a very high level abstraction, so it might cause problems if not used properly:
 
