@@ -97,7 +97,7 @@ public IAsyncInteraction<MessageBoxData> MessageBox { get; set; }
 public IAsyncInteraction<ILoginViewModel> LoginBox { get; set; }
 ```
 
-To use this interface, we just start a `Task`: pass the parameter via the `AsyncInteractionArgs`, the implementation of the interface then detect and switch to corresponding `GUI` thread (main GUI or secondary thread), create and render the window based on the parameter, set owner window and display the dialog. When the modal dialog is closed (or when the modeless dialog completes operation), set result to the `Task` so the caller can continue.
+To use this interface, we just start a `Task`: pass the parameter via the `AsyncInteractionArgs`, the implementation of the interface then switch to its specified `GUI` thread (main GUI or secondary thread), create and render the window based on the parameter, set owner window and display the dialog. When the modal dialog is closed (or when the modeless dialog completes operation), set result to the `Task` so the caller can continue.
 
 Below is an example of displaying a `MessageBox` in the async/await fashion:
 

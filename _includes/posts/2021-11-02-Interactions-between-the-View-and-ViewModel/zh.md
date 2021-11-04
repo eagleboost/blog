@@ -99,7 +99,7 @@ public IAsyncInteraction<MessageBoxData> MessageBox { get; set; }
 public IAsyncInteraction<ILoginViewModel> LoginBox { get; set; }
 ```
 
-使用则是与`Task`一脉相承的异步操作：把输入参数（通常也是返回值）通过`AsyncInteractionArgs`传递过去，由接口的具体实现检测并切换到相应都`GUI`线程，根据输入创建（不同类型的窗口）和渲染窗口（根据数据类型选择数据模版等），设置父窗口并显示，当窗口关闭后（或者非模态窗口完成处理后）把结果从`Task`传回给调用者。
+使用则是与`Task`一脉相承的异步操作：把输入参数（通常也是返回值）通过`AsyncInteractionArgs`传递过去，由接口的具体实现并切换到指定的`GUI`线程（主线程或其它`GUI`线程），根据输入创建（不同类型的窗口）和渲染窗口（根据数据类型选择数据模版等），设置父窗口并显示，当窗口关闭后（或者非模态窗口完成处理后）把结果从`Task`传回给调用者。
 
 下面的代码以显示`MessageBox`为例：
 
