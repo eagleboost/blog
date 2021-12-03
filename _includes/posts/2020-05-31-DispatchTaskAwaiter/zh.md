@@ -264,7 +264,12 @@ public readonly struct DispatchTaskAwaiterHelper
     {
       throw new InvalidOperationException("Task is unexpectedly not completed");
     }
-    
+
+    if (_task.IsCanceled)
+    {
+      throw new TaskCanceledException();
+    }
+
     if (_task.Exception != null)
     {
       throw _task.Exception;
