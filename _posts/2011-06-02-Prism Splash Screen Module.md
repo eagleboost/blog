@@ -12,6 +12,7 @@ tags:
   - WPF高级编程
   - Advanced WPF
   - .Net
+  - English
 ---
 
 > 本文转载自[我2011年在wordpress.com发布的博客](https://eagleboost.wordpress.com/2011/06/02/prism-splash-screen-module/)

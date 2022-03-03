@@ -18,16 +18,18 @@ tags:
     - .Net
     - InteractionRequest
     - Dialog Service
+    - Bilingual
+    - 双语
 ---
-
-<!-- Chinese Version -->
-<div class="zh post-container">
-    {% capture about_zh %}{% include posts/2021-11-02-Interactions-between-the-View-and-ViewModel/zh.md %}{% endcapture %}
-    {{ about_zh | markdownify }}
-</div>
 
 <!-- English Version -->
 <div class="en post-container">
     {% capture about_en %}{% include posts/2021-11-02-Interactions-between-the-View-and-ViewModel/en.md %}{% endcapture %}
     {{ about_en | markdownify }}
+</div>
+
+<!-- Chinese Version -->
+<div class="zh post-container">
+    {% capture about_zh %}{% include posts/2021-11-02-Interactions-between-the-View-and-ViewModel/zh.md %}{% endcapture %}
+    {{ about_zh | markdownify }}
 </div>

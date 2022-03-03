@@ -13,16 +13,18 @@ tags:
     - INotifyPropertyChanged
     - Reflection.Emit
     - .Net
+    - Bilingual
+    - 双语
 ---
-
-<!-- Chinese Version -->
-<div class="zh post-container">
-    {% capture about_zh %}{% include posts/2021-04-11-Unity-Container-03-Property-Container/zh.md %}{% endcapture %}
-    {{ about_zh | markdownify }}
-</div>
 
 <!-- English Version -->
 <div class="en post-container">
     {% capture about_en %}{% include posts/2021-04-11-Unity-Container-03-Property-Container/en.md %}{% endcapture %}
     {{ about_en | markdownify }}
+</div>
+
+<!-- Chinese Version -->
+<div class="zh post-container">
+    {% capture about_zh %}{% include posts/2021-04-11-Unity-Container-03-Property-Container/zh.md %}{% endcapture %}
+    {{ about_zh | markdownify }}
 </div>

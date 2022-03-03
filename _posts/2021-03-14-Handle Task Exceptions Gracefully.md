@@ -13,16 +13,18 @@ tags:
     - Task
     - Exception
     - .Net
+    - Bilingual
+    - 双语
 ---
-
-<!-- Chinese Version -->
-<div class="zh post-container">
-    {% capture about_zh %}{% include posts/2021-03-14-Handle-Task-Exceptions-Gracefully/zh.md %}{% endcapture %}
-    {{ about_zh | markdownify }}
-</div>
 
 <!-- English Version -->
 <div class="en post-container">
     {% capture about_en %}{% include posts/2021-03-14-Handle-Task-Exceptions-Gracefully/en.md %}{% endcapture %}
     {{ about_en | markdownify }}
+</div>
+
+<!-- Chinese Version -->
+<div class="zh post-container">
+    {% capture about_zh %}{% include posts/2021-03-14-Handle-Task-Exceptions-Gracefully/zh.md %}{% endcapture %}
+    {{ about_zh | markdownify }}
 </div>
