@@ -8,6 +8,7 @@ catalog:    true
 tags:
   - Prism 
   - User Experience
+  - 用户体验
   - Splash Screen
   - WPF高级编程
   - Advanced WPF
