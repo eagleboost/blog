@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      避免使用枚举类型 (1) 
+title:      避免使用枚举类型 (1) No more Enums
 subtitle:   "No more Enums"
 date:       2022-06-12 22:08:00
 author:     "eagleboost"
