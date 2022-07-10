@@ -145,6 +145,7 @@ For instance, in a stock trading system, each order contains a lot of properties
 ```
 
 The meanings of the Tag/Values are:
+
 | Tag/Value                          |Meaning|
 | --------                     |:----- |
 | 55=IBM               | The symbol is IBM|
