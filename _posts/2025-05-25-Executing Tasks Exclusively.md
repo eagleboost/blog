@@ -138,10 +138,8 @@ await Task.Run(taskFunc).ConfigureAwait(false);
 
 ![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/BlogImages/TaskRunnerBenchmark.png)
 
-*  不意外，所有版本执行效率相差无几。
-*  `TaskRunnerWithAsyncLock`通过`AsyncLock`实现了`100%`最优雅的`async/await`代码，但`AsyncLock`本身有开销，而且需要调用`Task.Run`产生额外开销，所以`#1`和`#2`出局。
-*  `SemaphoreSlim`开销虽然小，但是也需要额外调用`Task.Run`才能保证代码在后台线程运行，所以`#3`和`#4`也出局。
-*  `SequentialTaskExecutor`创建`Task Chain`有额外开销无法进一步优化也出局。
-*  最后剩下`#5`和`#6`两个基于`TaskFactory`的实现，开销也最小。
-
-&emsp;&emsp;`#5`使用`Task.Wait()`当异常发生时会被包装进一个`AggregateException`，而`#6`使用`Task.GetAwaiter().GetResult()`会抛出原始异常，因此`#6`，也就是基准测试胜出。
+&emsp;&emsp;不意外，所有版本执行效率相差无几。
+&emsp;&emsp;`TaskRunnerWithAsyncLock`通过`AsyncLock`实现了`100%`最优雅的`async/await`代码，但`AsyncLock`本身有开销，而且需要调用`Task.Run`产生额外开销，所以`#1`和`#2`出局。
+&emsp;&emsp;`SemaphoreSlim`开销虽然小，但是也需要额外调用`Task.Run`才能保证代码在后台线程运行，所以`#3`和`#4`也出局。
+&emsp;&emsp;`SequentialTaskExecutor`创建`Task Chain`有额外开销无法进一步优化也出局。
+&emsp;&emsp;最后剩下`#5`和`#6`两个基于`TaskFactory`的实现，开销也最小。`#5`使用`Task.Wait()`当异常发生时会被包装进一个`AggregateException`，而`#6`使用`Task.GetAwaiter().GetResult()`会抛出原始异常，因此`#6`，也就是基准测试胜出。
