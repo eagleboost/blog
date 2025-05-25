@@ -5,7 +5,6 @@ subtitle:   "——确保任务顺序执行"
 date:       2025-05-25
 author:     "eagleboost"
 header-img: "img/post-bg-cave.jpg"
-catalog: true
 tags:
     - Task
     - TaskFactory
@@ -19,6 +18,7 @@ tags:
 ---
 
 &emsp;&emsp;优化项目中某项功能时我提出了一个需求，类似于访问WPF的界面控件需要在`GUI`线程上一样，我希望某些代码在后台线程执行，但同一时间只能干一件事，这样可以简化代码不需要显示使用锁。
+
 &emsp;&emsp;`ConcurrentExclusiveSchedulerPair`有一个`ExclusiveTaskScheduler`,看起来可以用。
 >Provides task schedulers that coordinate to execute tasks while ensuring that concurrent tasks may run concurrently and exclusive tasks never do.
 >提供任务调度器，协调执行任务，确保并发任务可以同时运行，而独占任务则永远不会同时执行。
@@ -138,10 +138,10 @@ await Task.Run(taskFunc).ConfigureAwait(false);
 
 ![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/BlogImages/TaskRunnerBenchmark.png)
 
-1. 不意外，所有版本执行效率相差无几。
-2. `TaskRunnerWithAsyncLock`通过`AsyncLock`实现了`100%`最优雅的`async/await`代码，但`AsyncLock`本身有开销，而且需要调用`Task.Run`产生额外开销，所以`#1`和`#2`出局。
-3. `SemaphoreSlim`开销虽然小，但是也需要额外调用`Task.Run`才能保证代码在后台线程运行，所以`#3`和`#4`也出局。
-4. `SequentialTaskExecutor`创建`Task Chain`有额外开销无法进一步优化也出局。
-5. 最后剩下`#5`和`#6`两个基于`TaskFactory`的实现，开销也最小。
+*  不意外，所有版本执行效率相差无几。
+*  `TaskRunnerWithAsyncLock`通过`AsyncLock`实现了`100%`最优雅的`async/await`代码，但`AsyncLock`本身有开销，而且需要调用`Task.Run`产生额外开销，所以`#1`和`#2`出局。
+*  `SemaphoreSlim`开销虽然小，但是也需要额外调用`Task.Run`才能保证代码在后台线程运行，所以`#3`和`#4`也出局。
+*  `SequentialTaskExecutor`创建`Task Chain`有额外开销无法进一步优化也出局。
+*  最后剩下`#5`和`#6`两个基于`TaskFactory`的实现，开销也最小。
 
 &emsp;&emsp;`#5`使用`Task.Wait()`当异常发生时会被包装进一个`AggregateException`，而`#6`使用`Task.GetAwaiter().GetResult()`会抛出原始异常，因此`#6`，也就是基准测试胜出。
