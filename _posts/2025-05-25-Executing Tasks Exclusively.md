@@ -148,3 +148,5 @@ await Task.Run(taskFunc).ConfigureAwait(false);
 &emsp;&emsp;`SequentialTaskExecutor`创建`Task Chain`有额外开销无法进一步优化也出局。
 
 &emsp;&emsp;最后剩下`#5`和`#6`两个基于`TaskFactory`的实现，内存开销也最小。`#5`使用`Task.Wait()`当异常发生时会被包装进一个`AggregateException`，而`#6`使用`Task.GetAwaiter().GetResult()`会抛出原始异常，因此`#6`，也就是基准测试`TaskFactoryRunnerWithGetAwaiter`胜出。
+
+&emsp;&emsp;需要注意的是`TaskFactoryRunnerWithGetAwaiter`能用的前提是`taskFunc()`创建的`Task`必须始终在后台线程执行，否则会死锁。如果需要处理`Task`可能切换到主线程执行的情况，最好的办法其实是`#4`，虽然有额外开销，但不会阻塞调用线程。
