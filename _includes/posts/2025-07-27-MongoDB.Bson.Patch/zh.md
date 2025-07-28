@@ -74,7 +74,7 @@ else
 
 &emsp;&emsp;由于问题出在一个内部类`MongoDB.Bson.IO.JsonScanner`里面，没法通过自定义的`Converter`接管数据解析（还没有执行到调用`converter`的那一步）。大致看了`JsonReader`的代码，也没发现可供插入自定义逻辑的空间，要从常规方式动手的话得从头到尾实现一个`JsonReader`才能触摸到`JsonScanner`那段抛异常的代码，代价过高。最新的`MongoDB Driver`里这段逻辑也没有变化，可见要么没人报告过要么官方认为这不是一个`bug`（毕竟是用户错误）或者不值得处理。那么就只能`patch`代码了。
 
-&emsp;&emsp;我选择的方案是用`Homony`。写一个方法`IsBadInt64String`来判断给定字符串是否可以转换为`Int64`，在运行时修改`JsonScanner.GetNumberToken`的`IL`指令插入对`IsBadInt64String`的调用，把上面的代码改成逻辑上等价于下面这样：
+&emsp;&emsp;我选择的方案是用[Harmony](https://github.com/pardeike/Harmony)。写一个方法`IsBadInt64String`来判断给定字符串是否可以转换为`Int64`，在运行时修改`JsonScanner.GetNumberToken`的`IL`指令插入对`IsBadInt64String`的调用，把上面的代码改成逻辑上等价于下面这样：
 
 ```c#
 //即使type不是Double，如果str不能安全转换为Int64仍然按Double处理
