@@ -146,3 +146,5 @@ private void CompileContainsKey()
 ![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/BlogImages/CompiledDictionaryArrayLookupNet9.png)  
 
 &emsp;&emsp;Since dictionaries are typically populated once and then repeatedly queried, the overhead of compiling the switch expression is negligible. This means we can achieve immediate performance gains without the need for dynamic switching between arrays and dictionaries—a win-win scenario.
+
+For the full implementation, visit [GitHub](https://github.com/eagleboost/CompiledDictionaryApp).  

@@ -142,3 +142,5 @@ private void CompileContainsKey()
 ![](https://filedn.com/lCdMuPWubK2H86dRAWfspRh/BlogImages/CompiledDictionaryArrayLookupNet9.png)
 
 &emsp;&emsp;考虑到大多数情况下字典数据塞完之后几乎都是查询操作，所以无需频繁重新生成表达式，在这种情况下使用`Compiled Dictionary`可以带来就地性能提升，也用不着根据数据量动态切换来选择数组或者字典了，算得上一举两得。
+
+&emsp;&emsp;具体实现请移步[github](https://github.com/eagleboost/CompiledDictionaryApp)
