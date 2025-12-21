@@ -15,12 +15,12 @@ tags:
 
 <!-- English Version -->
 <div class="en post-container">
-    {% capture about_en %}{% include posts/2025-12-19-Vibe-Coding的悖论以及AI的理解力/en.md %}{% endcapture %}
+    {% capture about_en %}{% include posts/2025-12-19-Vibe-Coding-would-not-work-2/en.md %}{% endcapture %}
     {{ about_en | markdownify }}
 </div>
 
 <!-- Chinese Version -->
 <div class="zh post-container">
-    {% capture about_zh %}{% include posts/2025-12-19-Vibe-Coding的悖论以及AI的理解力/zh.md %}{% endcapture %}
+    {% capture about_zh %}{% include posts/2025-12-19-Vibe-Coding-would-not-work-2/zh.md %}{% endcapture %}
     {{ about_zh | markdownify }}
 </div>
