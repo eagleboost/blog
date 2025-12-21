@@ -17,14 +17,14 @@ This also illustrates, from one perspective, the importance of prompts and why `
 
 So, are there any logical fallacies in the article? At least not the straw man fallacy. Let's demonstrate this. First, ask two questions:
 
-1.  Does the true `Vibe Coding` actually exist?
-2.  Does `Vibe Coding` have any meaning?
++ Does the true `Vibe Coding` actually exist?
++ Does `Vibe Coding` have any meaning?
 
 The answer is yes. A real-world example: a client with no technical knowledge tells a contractor what kind of software to develop. However, for this model to work, several preconditions are necessary:
 
-1.  The contractor has experience.
-2.  The contractor has the ability to identify and communicate ambiguous requirements with the client.
-3.  The contractor has the ability to fix errors (which is inherently the contractor's responsibility).
++ The contractor has experience.
++ The contractor has the ability to identify and communicate ambiguous requirements with the client.
++ The contractor has the ability to fix errors (which is inherently the contractor's responsibility).
 
 For current `AI`, the first point is arguably met, given the vast amount of data it's been pre-trained on—its theoretical experience surpasses that of all humans combined. The second point is questionable. Probability-based `AI` cannot understand the real world through interaction, nor can it truly comprehend human needs. Furthermore, for various reasons, it cannot repeatedly ask humans for clarification, as that would make the `AI` vendor seem inadequate.
 
