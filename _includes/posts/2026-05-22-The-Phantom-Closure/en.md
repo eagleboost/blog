@@ -92,7 +92,7 @@ Setting a method breakpoint on the closure's constructor stopped execution at th
   IL_0043: ldloc.0
   IL_0044: ldfld      ...::element
   IL_0049: ldloc.0
-  IL_004a: ldftn      ...::`<TryPrintVisualTreeInfo>b__0
+  IL_004a: ldftn      ...::<TryPrintVisualTreeInfo>b__0
   IL_0050: newobj     Action:: .ctor
   IL_0055: call       DispatcherObjectExtensions::BeginInvoke
   IL_005a: pop
